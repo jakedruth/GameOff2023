@@ -1,7 +1,6 @@
 using Godot;
 using System;
 using FSM;
-using System.Data.Common;
 
 public partial class PlayerController : Node
 {
