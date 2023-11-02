@@ -4,70 +4,69 @@ using System.Collections.Generic;
 
 namespace FSM
 {
-    public class FSM_Machine<T>
+    public partial class FSM_Machine
     {
-        public T Owner { get; private set; }
+        public object Owner { get; private set; }
         public Dictionary<string, FSM_State> _states;
-        private FSM_State _curretnState;
+        public FSM_State curretnState;
 
-        public FSM_Machine(T Owner)
+        public FSM_Machine(object Owner)
         {
             this.Owner = Owner;
             _states = new Dictionary<string, FSM_State>();
         }
 
-        protected void AddState(FSM_State state)
+        public void AddState(FSM_State state)
         {
-            _states.Add(state.Name.ToLower(), state);
+            _states.Add(state.StateName.ToLower(), state);
             state.Transition += OnStateTransition;
         }
 
         public void Ready(string startState)
         {
-            _curretnState = _states[startState.ToLower()];
-            _curretnState?.OnEnter();
+            curretnState = _states[startState.ToLower()];
+            curretnState?.OnEnter();
         }
 
-        public void Process(double dt)
+        public void Process(float dt)
         {
-            _curretnState?.Process(dt);
+            curretnState?.Process(dt);
         }
 
-        public void PhysicsProcess(double dt)
+        public void PhysicsProcess(float dt)
         {
-            _curretnState?.PhysicsProcess(dt);
+            curretnState?.PhysicsProcess(dt);
         }
 
         public void OnStateTransition(FSM_State sender, string targetState)
         {
-            if (sender != _curretnState)
+            if (sender != curretnState)
                 return;
 
             FSM_State nextState = _states[targetState];
-            if (nextState == null)
-                return;
 
-            _curretnState.OnExit();
-            nextState.OnEnter();
-            _curretnState = nextState;
+            curretnState?.OnExit();
+            nextState?.OnEnter();
+            curretnState = nextState;
         }
+    }
 
-        public abstract class FSM_State
+    public abstract partial class FSM_State : Resource
+    {
+        public FSM_Machine Machine { get; private set; }
+        [Export] public virtual string StateName { get; protected set; }
+
+        public void Init(FSM_Machine machine)
         {
-            public FSM_Machine<T> Machine { get; private set; }
-            public abstract string Name { get; }
-            public FSM_State(FSM_Machine<T> machine)
-            {
-                Machine = machine;
-                Machine.AddState(this);
-            }
-
-            public Action<FSM_State, string> Transition;
-
-            public abstract void OnEnter();
-            public abstract void OnExit();
-            public abstract void Process(double dt);
-            public abstract void PhysicsProcess(double dt);
+            Machine = machine;
+            Machine.AddState(this);
         }
+
+        public Action<FSM_State, string> Transition;
+
+        public abstract void OnEnter();
+        public abstract void OnExit();
+        public abstract void Process(float dt);
+        public abstract void PhysicsProcess(float dt);
     }
 }
