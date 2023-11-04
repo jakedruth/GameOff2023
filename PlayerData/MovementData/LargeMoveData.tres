@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MovementData" load_steps=2 format=3 uid="uid://1ffmj0hm5t6r"]
+
+[ext_resource type="Script" path="res://Scripts/Player/MovementData.cs" id="1_b7al8"]
+
+[resource]
+script = ExtResource("1_b7al8")
+maxSpeed = 45.0
+horizontalAcceleration = 500.0
+jumpHeight = 12.0
+gravityUp = 980.0
+gravityDown = 980.0

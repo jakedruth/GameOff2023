@@ -38,12 +38,15 @@ namespace FSM
             curretnState?.PhysicsProcess(dt);
         }
 
-        public void OnStateTransition(FSM_State sender, string targetState)
+        private void OnStateTransition(FSM_State sender, string targetState)
         {
             if (sender != curretnState)
                 return;
 
-            FSM_State nextState = _states[targetState];
+            FSM_State nextState = _states[targetState.ToLower()];
+
+            if (curretnState == nextState)
+                return;
 
             curretnState?.OnExit();
             nextState?.OnEnter();
@@ -70,3 +73,5 @@ namespace FSM
         public abstract void PhysicsProcess(float dt);
     }
 }
+
+

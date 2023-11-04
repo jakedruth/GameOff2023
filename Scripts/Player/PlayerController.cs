@@ -38,6 +38,16 @@ public partial class PlayerController : CharacterBody2D
         jumpKey = Input.IsActionPressed("jump");
         onJumpKey = Input.IsActionJustPressed("jump");
 
+        if (Input.IsKeyLabelPressed(Key.Kp1))
+            _stateMachine.curretnState.Transition(_stateMachine.curretnState, "Small");
+
+        if (Input.IsKeyLabelPressed(Key.Kp2))
+            _stateMachine.curretnState.Transition(_stateMachine.curretnState, "Normal");
+
+        if (Input.IsKeyLabelPressed(Key.Kp3))
+            _stateMachine.curretnState.Transition(_stateMachine.curretnState, "Large");
+
+
         // Update the state machine
         _stateMachine.Process(dt);
     }

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PlayerMoveState" load_steps=3 format=3 uid="uid://mhop0tyygxtq"]
+
+[ext_resource type="Resource" uid="uid://p5fhd6me3it6" path="res://PlayerData/MovementData/SmallMoveData.tres" id="1_yx0nu"]
+[ext_resource type="Script" path="res://Scripts/Player/States/PlayerMoveState.cs" id="2_a5836"]
+
+[resource]
+script = ExtResource("2_a5836")
+_movementData = ExtResource("1_yx0nu")
+_playerScale = 0.5
+StateName = "Small"

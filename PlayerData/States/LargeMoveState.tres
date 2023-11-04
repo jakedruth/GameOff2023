@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PlayerMoveState" load_steps=3 format=3 uid="uid://ge1l86il277k"]
+
+[ext_resource type="Resource" uid="uid://1ffmj0hm5t6r" path="res://PlayerData/MovementData/LargeMoveData.tres" id="1_cpe4d"]
+[ext_resource type="Script" path="res://Scripts/Player/States/PlayerMoveState.cs" id="2_02l4o"]
+
+[resource]
+script = ExtResource("2_02l4o")
+_movementData = ExtResource("1_cpe4d")
+_playerScale = 2.0
+StateName = "Large"

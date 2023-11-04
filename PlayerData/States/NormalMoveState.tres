@@ -1,9 +1,10 @@
 [gd_resource type="Resource" script_class="PlayerMoveState" load_steps=3 format=3 uid="uid://do8o10b1yumtu"]
 
-[ext_resource type="Resource" uid="uid://bgqylp4amoqm2" path="res://NormalMoveData.tres" id="1_6sevw"]
+[ext_resource type="Resource" uid="uid://bgqylp4amoqm2" path="res://PlayerData/MovementData/NormalMoveData.tres" id="1_trjt5"]
 [ext_resource type="Script" path="res://Scripts/Player/States/PlayerMoveState.cs" id="1_ypt8v"]
 
 [resource]
 script = ExtResource("1_ypt8v")
-movementData = ExtResource("1_6sevw")
+_movementData = ExtResource("1_trjt5")
+_playerScale = 1.0
 StateName = "Normal"

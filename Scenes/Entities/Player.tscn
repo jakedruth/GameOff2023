@@ -1,12 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://7rujpnae1amr"]
+[gd_scene load_steps=12 format=3 uid="uid://7rujpnae1amr"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="1_r2x4j"]
 [ext_resource type="Resource" uid="uid://do8o10b1yumtu" path="res://PlayerData/States/NormalMoveState.tres" id="2_4nh21"]
 [ext_resource type="Texture2D" uid="uid://dhobr4oj781bd" path="res://Resources/monochrome_tilemap_transparent_packed.png" id="2_w6vjy"]
+[ext_resource type="Resource" uid="uid://mhop0tyygxtq" path="res://PlayerData/States/SmallMoveState.tres" id="3_cg081"]
+[ext_resource type="Resource" uid="uid://ge1l86il277k" path="res://PlayerData/States/LargeMoveState.tres" id="4_ak40m"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oe8wv"]
-radius = 4.0
-height = 10.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i2rdh"]
+size = Vector2(8, 11)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v1pmm"]
 atlas = ExtResource("2_w6vjy")
@@ -55,15 +56,17 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D"]
+floor_constant_speed = true
+floor_snap_length = 15.0
 script = ExtResource("1_r2x4j")
-_states = Array[Resource]([ExtResource("2_4nh21")])
+_states = Array[Resource]([ExtResource("2_4nh21"), ExtResource("3_cg081"), ExtResource("4_ak40m")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -6)
-shape = SubResource("CapsuleShape2D_oe8wv")
+position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_i2rdh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 0.52549, 0, 1)
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_7s0qb")
-animation = &"walk"
-frame_progress = 0.877274
+animation = &"jump"
