@@ -50,6 +50,7 @@ public partial class PlayerMoveState : FSM_State
         else
             vel.Y = _movementData.gravityDown * dt;
 
+        // TODO: Implement a variable jump height
         // Handle jumping
         if (_jumpKeyBuffer > 0 && _controller.IsOnFloor())
             vel.Y = _jumpForce;
@@ -59,7 +60,23 @@ public partial class PlayerMoveState : FSM_State
 
         // Update Position
         _controller.Velocity = vel;
-        _controller.MoveAndSlide();
+        bool collided = _controller.MoveAndSlide();
+        if (collided)
+        {
+            float force = 20;
+            for (int i = 0; i < _controller.GetSlideCollisionCount(); i++)
+            {
+                var collision = _controller.GetSlideCollision(i);
+                if (collision.GetCollider() is RigidBody2D other)
+                {
+                    if (other.IsInGroup("Box"))
+                    {
+                        other.ApplyCentralImpulse(collision.GetNormal() * -force);
+                    }
+                    // other.ApplyForce(collision.GetNormal() * -force);
+                }
+            }
+        }
         HandleSprite();
     }
 
