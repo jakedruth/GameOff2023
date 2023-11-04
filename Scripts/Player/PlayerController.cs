@@ -38,6 +38,9 @@ public partial class PlayerController : CharacterBody2D
         jumpKey = Input.IsActionPressed("jump");
         onJumpKey = Input.IsActionJustPressed("jump");
 
+        // TODO: Do I want to have multiple, duplicate states for small, medium, large?
+        //  Or should I have only multiple move data resources that get switched around? I like this option better personally.
+
         if (Input.IsKeyLabelPressed(Key.Kp1))
             _stateMachine.curretnState.Transition(_stateMachine.curretnState, "Small");
 

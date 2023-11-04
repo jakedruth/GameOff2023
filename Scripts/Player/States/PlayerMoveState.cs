@@ -58,6 +58,7 @@ public partial class PlayerMoveState : FSM_State
         // Handle horizontal movementData
         vel.X = Mathf.MoveToward(vel.X, _controller.movementInput.X * _movementData.maxSpeed, _movementData.horizontalAcceleration * dt);
 
+        // TODO: Fix how I implemented pushing blocks
         // Update Position
         _controller.Velocity = vel;
         bool collided = _controller.MoveAndSlide();
