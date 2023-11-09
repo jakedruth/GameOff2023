@@ -57,7 +57,6 @@ public partial class Pushable : StaticBody2D
         _imgHolder.Position = offset;
     }
 
-    // TODO: Remove this function. This is a test to see if the action
     private void HandleSlide()
     {
 

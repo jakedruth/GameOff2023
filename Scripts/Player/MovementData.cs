@@ -4,11 +4,27 @@ using System;
 [GlobalClass]
 public partial class MovementData : Resource
 {
-    //TODO: Convert each field to a getter and setter
-    // The end goal is to have a field called jump velocity that gets set automatically when jumpheight or gravity is changed
-    [Export] public float maxSpeed;
-    [Export] public float horizontalAcceleration;
-    [Export] public float jumpHeight;
-    [Export] public float gravityUp;
-    [Export] public float gravityDown;
+    [Export] public float MaxSpeed { get => _maxSpeed; private set => _maxSpeed = value; }
+    [Export] public float HorizontalAcceleration { get => _horizontalAcceleration; private set => _horizontalAcceleration = value; }
+    [Export] public float GravityUp { get => _gravityUp; private set => _gravityUp = value; }
+    [Export] public float GravityDown { get => _gravityDown; private set => _gravityDown = value; }
+    [Export]
+    public float JumpHeight
+    {
+        get { return _jumpHeight; }
+        private set
+        {
+            _jumpHeight = value;
+            _jumpVelocity = -Mathf.Sqrt(2 * _jumpHeight * _gravityUp);
+        }
+    }
+    public float JumpVelocity { get { return _jumpVelocity; } }
+
+    private float _maxSpeed;
+    private float _horizontalAcceleration;
+    private float _jumpHeight;
+    private float _gravityUp;
+    private float _gravityDown;
+    private float _jumpVelocity;
+
 }

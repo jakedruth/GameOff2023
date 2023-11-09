@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_b7al8")
-maxSpeed = 45.0
-horizontalAcceleration = 500.0
-jumpHeight = 12.0
-gravityUp = 980.0
-gravityDown = 980.0
+MaxSpeed = 45.0
+HorizontalAcceleration = 500.0
+GravityUp = 980.0
+GravityDown = 980.0
+JumpHeight = 12.0

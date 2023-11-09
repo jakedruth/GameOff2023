@@ -10,12 +10,10 @@ public partial class PlayerMoveState : FSM_State
     [Export] MovementData _movementData;
     [Export] float _playerScale;
     private float _jumpKeyBuffer;
-    private float _jumpForce;
 
     public override void OnEnter()
     {
         _controller = Machine.Owner as PlayerController;
-        _jumpForce = -Mathf.Sqrt(2 * _movementData.jumpHeight * _movementData.gravityUp);
         _controller.Scale = Vector2.One * _playerScale;
     }
 
@@ -46,17 +44,17 @@ public partial class PlayerMoveState : FSM_State
 
         // Handle gravity
         if (!_controller.IsOnFloor())
-            vel.Y += _movementData.gravityDown * dt;
+            vel.Y += _movementData.GravityDown * dt;
         else
-            vel.Y = _movementData.gravityDown * dt;
+            vel.Y = _movementData.GravityDown * dt;
 
         // TODO: Implement a variable jump height
         // Handle jumping
         if (_jumpKeyBuffer > 0 && _controller.IsOnFloor())
-            vel.Y = _jumpForce;
+            vel.Y = _movementData.JumpVelocity;
 
         // Handle horizontal movementData
-        vel.X = Mathf.MoveToward(vel.X, _controller.movementInput.X * _movementData.maxSpeed, _movementData.horizontalAcceleration * dt);
+        vel.X = Mathf.MoveToward(vel.X, _controller.movementInput.X * _movementData.MaxSpeed, _movementData.HorizontalAcceleration * dt);
 
         // Update Position
         _controller.Velocity = vel;
@@ -87,7 +85,7 @@ public partial class PlayerMoveState : FSM_State
         if (_controller.IsOnFloor())
         {
             const float AVG_DT = 0.0166f;
-            float MINSPEED = _movementData.horizontalAcceleration * AVG_DT * 1.1f;
+            float MINSPEED = _movementData.HorizontalAcceleration * AVG_DT * 1.1f;
             float hSpeed = Mathf.Abs(_controller.Velocity.X);
             if (hSpeed < MINSPEED && _controller.animatedSprite2D.Animation != "idle")
             {
