@@ -68,4 +68,4 @@ shape = SubResource("RectangleShape2D_i2rdh")
 modulate = Color(1, 0.52549, 0, 1)
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_7s0qb")
-animation = &"jump"
+animation = &"idle"
