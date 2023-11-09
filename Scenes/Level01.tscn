@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://b26vn55ay34td"]
+[gd_scene load_steps=9 format=3 uid="uid://b26vn55ay34td"]
 
 [ext_resource type="Texture2D" uid="uid://b7bqh8pp3smkx" path="res://Resources/monochrome-transparent_packed.png" id="2_82k1a"]
 [ext_resource type="PackedScene" uid="uid://7rujpnae1amr" path="res://Scenes/Entities/Player.tscn" id="2_rihss"]
 [ext_resource type="Texture2D" uid="uid://dhobr4oj781bd" path="res://Resources/monochrome_tilemap_transparent_packed.png" id="3_1yrc3"]
 [ext_resource type="PackedScene" uid="uid://c7u6to6cb1f4m" path="res://Scenes/Entities/box.tscn" id="4_ketsn"]
+[ext_resource type="PackedScene" uid="uid://dvrmacrtlnw70" path="res://Scenes/Entities/fan.tscn" id="5_qrct2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sfgk7"]
 texture = ExtResource("3_1yrc3")
@@ -4773,3 +4774,7 @@ floor_snap_length = 8.0
 
 [node name="Box" parent="." instance=ExtResource("4_ketsn")]
 position = Vector2(280, 75)
+
+[node name="Fan" parent="." instance=ExtResource("5_qrct2")]
+position = Vector2(120, 128)
+rotation = -1.57079

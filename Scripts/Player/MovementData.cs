@@ -4,10 +4,21 @@ using System;
 [GlobalClass]
 public partial class MovementData : Resource
 {
+    private float _playerScale;
+    private float _maxSpeed;
+    private float _horizontalAcceleration;
+    private float _jumpHeight;
+    private float _gravityUp;
+    private float _gravityDown;
+    private float _gravityFanMultiplier;
+    private float _jumpVelocity;
+
+    [Export] public float PlayerScale { get => _playerScale; private set => _playerScale = value; }
     [Export] public float MaxSpeed { get => _maxSpeed; private set => _maxSpeed = value; }
     [Export] public float HorizontalAcceleration { get => _horizontalAcceleration; private set => _horizontalAcceleration = value; }
     [Export] public float GravityUp { get => _gravityUp; private set => _gravityUp = value; }
     [Export] public float GravityDown { get => _gravityDown; private set => _gravityDown = value; }
+    [Export] public float GravityFanMultiplier { get => _gravityFanMultiplier; private set => _gravityFanMultiplier = value; }
     [Export]
     public float JumpHeight
     {
@@ -19,12 +30,4 @@ public partial class MovementData : Resource
         }
     }
     public float JumpVelocity { get { return _jumpVelocity; } }
-
-    private float _maxSpeed;
-    private float _horizontalAcceleration;
-    private float _jumpHeight;
-    private float _gravityUp;
-    private float _gravityDown;
-    private float _jumpVelocity;
-
 }
