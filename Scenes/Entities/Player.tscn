@@ -1,35 +1,39 @@
-[gd_scene load_steps=12 format=3 uid="uid://7rujpnae1amr"]
+[gd_scene load_steps=13 format=3 uid="uid://7rujpnae1amr"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="1_r2x4j"]
 [ext_resource type="Resource" uid="uid://do8o10b1yumtu" path="res://PlayerData/States/NormalMoveState.tres" id="2_4nh21"]
-[ext_resource type="Texture2D" uid="uid://dhobr4oj781bd" path="res://Resources/monochrome_tilemap_transparent_packed.png" id="2_w6vjy"]
 [ext_resource type="Resource" uid="uid://mhop0tyygxtq" path="res://PlayerData/States/SmallMoveState.tres" id="3_cg081"]
 [ext_resource type="Resource" uid="uid://ge1l86il277k" path="res://PlayerData/States/LargeMoveState.tres" id="4_ak40m"]
+[ext_resource type="Texture2D" uid="uid://b7bqh8pp3smkx" path="res://Resources/monochrome-transparent_packed.png" id="5_pp54g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i2rdh"]
 size = Vector2(8, 11)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_v1pmm"]
-atlas = ExtResource("2_w6vjy")
-region = Rect2(16, 192, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_rdre6"]
+atlas = ExtResource("5_pp54g")
+region = Rect2(288, 112, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fawne"]
-atlas = ExtResource("2_w6vjy")
-region = Rect2(64, 192, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_aedhc"]
+atlas = ExtResource("5_pp54g")
+region = Rect2(352, 112, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6cfv8"]
-atlas = ExtResource("2_w6vjy")
-region = Rect2(32, 192, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_vc3ld"]
+atlas = ExtResource("5_pp54g")
+region = Rect2(336, 112, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7vxub"]
-atlas = ExtResource("2_w6vjy")
-region = Rect2(48, 192, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_62hyg"]
+atlas = ExtResource("5_pp54g")
+region = Rect2(304, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wrgo"]
+atlas = ExtResource("5_pp54g")
+region = Rect2(320, 112, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7s0qb"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_v1pmm")
+"texture": SubResource("AtlasTexture_rdre6")
 }],
 "loop": true,
 "name": &"idle",
@@ -37,18 +41,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fawne")
+"texture": SubResource("AtlasTexture_aedhc")
 }],
 "loop": true,
-"name": &"jump",
+"name": &"midair_down",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6cfv8")
+"texture": SubResource("AtlasTexture_vc3ld")
+}],
+"loop": true,
+"name": &"midair_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_62hyg")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7vxub")
+"texture": SubResource("AtlasTexture_0wrgo")
 }],
 "loop": true,
 "name": &"walk",
@@ -65,7 +77,6 @@ position = Vector2(0, -5.5)
 shape = SubResource("RectangleShape2D_i2rdh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(1, 0.52549, 0, 1)
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_7s0qb")
-animation = &"idle"
+animation = &"midair_up"

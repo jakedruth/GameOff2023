@@ -98,7 +98,10 @@ public partial class PlayerMoveState : FSM_State
         }
         else
         {
-            _controller.animatedSprite2D.Play("jump");
+            if (_controller.Velocity.Y <= 10)
+                _controller.animatedSprite2D.Play("midair_up");
+            else
+                _controller.animatedSprite2D.Play("midair_down");
         }
     }
 }
