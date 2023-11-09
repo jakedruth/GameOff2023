@@ -56,7 +56,6 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
-floor_constant_speed = true
 floor_snap_length = 15.0
 script = ExtResource("1_r2x4j")
 _states = Array[Resource]([ExtResource("2_4nh21"), ExtResource("3_cg081"), ExtResource("4_ak40m")])

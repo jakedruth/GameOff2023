@@ -58,29 +58,18 @@ public partial class PlayerMoveState : FSM_State
         // Handle horizontal movementData
         vel.X = Mathf.MoveToward(vel.X, _controller.movementInput.X * _movementData.maxSpeed, _movementData.horizontalAcceleration * dt);
 
-        // TODO: Fix how I implemented pushing blocks
         // Update Position
         _controller.Velocity = vel;
         bool collided = _controller.MoveAndSlide();
         if (collided)
         {
-            float force = 20;
             for (int i = 0; i < _controller.GetSlideCollisionCount(); i++)
             {
                 var collision = _controller.GetSlideCollision(i);
-                if (collision.GetCollider() is RigidBody2D other)
-                {
-                    if (other.IsInGroup("Box"))
-                    {
-                        other.ApplyCentralImpulse(collision.GetNormal() * -force);
-                    }
-                    // other.ApplyForce(collision.GetNormal() * -force);
-                }
                 if (collision.GetCollider() is Pushable pushable)
                 {
                     Vector2 normal = collision.GetNormal();
-                    float dot = Vector2.Up.Dot(normal);
-                    if (Mathf.Abs(dot) <= 0.1f)
+                    if (Mathf.Abs(normal.X) >= Mathf.Abs(normal.Y))
                     {
                         Vector2 push = vel * dt;
                         push.Y = 0;

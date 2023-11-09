@@ -17,28 +17,44 @@ public partial class Pushable : StaticBody2D
     public override void _PhysicsProcess(double delta)
     {
         float dt = (float)delta;
+
         // Handle Physics
         bool rayHit = _rayCast2D.IsColliding();
-
         Vector2 step = Vector2.Down * velocity * dt;
-        if (rayHit)
+        KinematicCollision2D collision = MoveAndCollide(step);
+        if (collision != null)
         {
-            Vector2 dir = _rayCast2D.GetCollisionNormal().Normalized();
-            dir.Y = 0;
-            step += dir * velocity * dt;
+            Vector2 normal = collision.GetNormal();
+            if (normal.Dot(Vector2.Up) < 0.9f)
+            {
+                Vector2 slide = step.Slide(normal);
+                MoveAndCollide(slide);
+            }
+            else
+            {
+                if (rayHit)
+                {
+                    Vector2 dir = _rayCast2D.GetCollisionNormal();
+                    dir.Y = 0;
+                    dir = dir.Normalized();
+                    step += dir * velocity * dt;
+                    MoveAndCollide(step);
+                }
+            }
         }
-
-        MoveAndCollide(step);
 
         // Handle Sprite Rotation
-        Vector2 normal = Vector2.Up;
+        Vector2 spriteFacing = Vector2.Up;
         if (rayHit)
         {
-            normal = _rayCast2D.GetCollisionNormal();
+            spriteFacing = _rayCast2D.GetCollisionNormal();
         }
 
-        float target = normal.Angle() + (Mathf.Pi / 2f);
+        float target = spriteFacing.Angle() + (Mathf.Pi / 2f);
         _imgHolder.Rotation = (float)Mathf.Lerp(_imgHolder.Rotation, target, 1 - Mathf.Exp(-20 * delta));
+        Vector2 offset = Vector2.Zero;
+        offset.Y = -Mathf.Sin(_imgHolder.Rotation);
+        _imgHolder.Position = offset;
     }
 
     private void HandleSlide()
