@@ -76,6 +76,17 @@ public partial class PlayerMoveState : FSM_State
                     }
                     // other.ApplyForce(collision.GetNormal() * -force);
                 }
+                if (collision.GetCollider() is Pushable pushable)
+                {
+                    Vector2 normal = collision.GetNormal();
+                    float dot = Vector2.Up.Dot(normal);
+                    if (Mathf.Abs(dot) <= 0.1f)
+                    {
+                        Vector2 push = vel * dt;
+                        push.Y = 0;
+                        pushable.MoveAndCollide(push);
+                    }
+                }
             }
         }
         HandleSprite();
@@ -100,7 +111,6 @@ public partial class PlayerMoveState : FSM_State
         }
         else
         {
-            Console.WriteLine("In The Air");
             _controller.animatedSprite2D.Play("jump");
         }
     }
