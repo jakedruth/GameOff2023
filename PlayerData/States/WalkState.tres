@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PlayerMoveState" load_steps=2 format=3 uid="uid://mhop0tyygxtq"]
+
+[ext_resource type="Script" path="res://Scripts/Player/States/PlayerMoveState.cs" id="1_65owl"]
+
+[resource]
+script = ExtResource("1_65owl")
+StateName = "Walk"

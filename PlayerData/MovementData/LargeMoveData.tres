@@ -10,4 +10,6 @@ HorizontalAcceleration = 500.0
 GravityUp = 980.0
 GravityDown = 980.0
 GravityFanMultiplier = 1.0
+FanOverrideYSpeed = false
+FanOverrideYSpeedAmount = 0.0
 JumpHeight = 12.0

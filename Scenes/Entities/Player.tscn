@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://7rujpnae1amr"]
+[gd_scene load_steps=14 format=3 uid="uid://cvnospxfmgq6n"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="1_r2x4j"]
-[ext_resource type="Resource" uid="uid://do8o10b1yumtu" path="res://PlayerData/States/NormalMoveState.tres" id="2_4nh21"]
-[ext_resource type="Resource" uid="uid://mhop0tyygxtq" path="res://PlayerData/States/SmallMoveState.tres" id="3_cg081"]
-[ext_resource type="Resource" uid="uid://ge1l86il277k" path="res://PlayerData/States/LargeMoveState.tres" id="4_ak40m"]
+[ext_resource type="Resource" uid="uid://mhop0tyygxtq" path="res://PlayerData/States/WalkState.tres" id="3_3hx78"]
+[ext_resource type="Resource" uid="uid://p5fhd6me3it6" path="res://PlayerData/MovementData/SmallMoveData.tres" id="3_op5we"]
+[ext_resource type="Resource" uid="uid://bgqylp4amoqm2" path="res://PlayerData/MovementData/NormalMoveData.tres" id="4_qsmhw"]
+[ext_resource type="Resource" uid="uid://1ffmj0hm5t6r" path="res://PlayerData/MovementData/LargeMoveData.tres" id="5_e20jc"]
 [ext_resource type="Texture2D" uid="uid://b7bqh8pp3smkx" path="res://Resources/monochrome-transparent_packed.png" id="5_pp54g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i2rdh"]
@@ -70,7 +71,8 @@ animations = [{
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 floor_snap_length = 15.0
 script = ExtResource("1_r2x4j")
-_states = Array[Resource]([ExtResource("2_4nh21"), ExtResource("3_cg081"), ExtResource("4_ak40m")])
+_states = Array[Resource]([ExtResource("3_3hx78")])
+_movementDatas = Array[Object]([ExtResource("3_op5we"), ExtResource("4_qsmhw"), ExtResource("5_e20jc")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5.5)

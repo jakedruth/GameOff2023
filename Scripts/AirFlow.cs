@@ -3,6 +3,8 @@ using System;
 
 public partial class AirFlow : Area2D
 {
+    [Export] private float _launchSpeed;
+
     public override void _Ready()
     {
         base._Ready();
@@ -15,15 +17,14 @@ public partial class AirFlow : Area2D
         {
             Console.WriteLine("Player has entered");
             player.isInFan = true;
-            // if (player.StateMachine.curretnState is PlayerMoveState state)
-            // {
-            //     if (state.MovementData.FanOverrideYSpeed)
-            //     {
-            //         Vector2 vel = player.Velocity;
-            //         vel.Y = -10;
-            //         player.Velocity = vel;
-            //     }
-            // }
+            if (player.MovementData.FanOverrideYSpeed)
+            {
+                Vector2 vel = player.Velocity;
+                float deltaY = Mathf.Abs(player.Position.Y - Position.Y);
+                float k = 1 - deltaY / 80f;
+                vel.Y = _launchSpeed * k;
+                player.Velocity = vel;
+            }
         }
     }
 

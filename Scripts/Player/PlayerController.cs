@@ -9,6 +9,8 @@ public partial class PlayerController : CharacterBody2D
     public FSM_Machine StateMachine { get; private set; }
 
     [Export] FSM_State[] _states;
+    [Export] MovementData[] _movementDatas;
+    public MovementData MovementData { get; private set; }
 
     public Vector2 movementInput;
     public bool jumpKey;
@@ -27,6 +29,7 @@ public partial class PlayerController : CharacterBody2D
             _states[i].Init(StateMachine);
         }
 
+        SwitchMovementData(1);
         StateMachine.Ready(_states[0].StateName);
     }
 
@@ -39,18 +42,15 @@ public partial class PlayerController : CharacterBody2D
         jumpKey = Input.IsActionPressed("jump");
         onJumpKey = Input.IsActionJustPressed("jump");
 
-        // TODO: Do I want to have multiple, duplicate states for small, medium, large?
-        //  Or should I have only multiple move data resources that get switched around? I like this option better personally.
-
+        // Debug How to change sizes
         if (Input.IsKeyLabelPressed(Key.Kp1))
-            StateMachine.curretnState.Transition(StateMachine.curretnState, "Small");
+            SwitchMovementData(0);
 
         if (Input.IsKeyLabelPressed(Key.Kp2))
-            StateMachine.curretnState.Transition(StateMachine.curretnState, "Normal");
+            SwitchMovementData(1);
 
         if (Input.IsKeyLabelPressed(Key.Kp3))
-            StateMachine.curretnState.Transition(StateMachine.curretnState, "Large");
-
+            SwitchMovementData(2);
 
         // Update the state machine
         StateMachine.Process(dt);
@@ -62,5 +62,11 @@ public partial class PlayerController : CharacterBody2D
 
         // Update the state machine
         StateMachine.PhysicsProcess(dt);
+    }
+
+    public void SwitchMovementData(int index)
+    {
+        MovementData = _movementDatas[index];
+        Scale = Vector2.One * MovementData.PlayerScale;
     }
 }
