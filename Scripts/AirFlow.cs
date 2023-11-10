@@ -21,7 +21,7 @@ public partial class AirFlow : Area2D
             {
                 Vector2 vel = player.Velocity;
                 float deltaY = Mathf.Abs(player.Position.Y - Position.Y);
-                float k = 1 - deltaY / 80f;
+                float k = Mathf.Clamp(1 - deltaY / 80f, 0, 1);
                 vel.Y = _launchSpeed * k;
                 player.Velocity = vel;
             }
