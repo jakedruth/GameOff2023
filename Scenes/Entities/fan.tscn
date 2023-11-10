@@ -64,7 +64,7 @@ shape = SubResource("RectangleShape2D_p1fyj")
 rotation = -1.5708
 sprite_frames = SubResource("SpriteFrames_63kmu")
 animation = &"idle"
-frame_progress = 0.839111
+frame_progress = 0.728244
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 modulate = Color(1, 1, 1, 0.447059)

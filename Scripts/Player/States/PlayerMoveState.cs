@@ -43,7 +43,7 @@ public partial class PlayerMoveState : FSM_State
 
         // Handle gravity
         bool applyGravity = true;
-        float gravity = vel.Y >= 0 ? _controller.MovementData.GravityDown : md.GravityUp;
+        float gravity = _controller.jumpKey ? md.GravityUp : _controller.MovementData.GravityDown;
         if (_controller.isInFan)
         {
             if (md.FanOverrideYSpeed)
@@ -65,7 +65,6 @@ public partial class PlayerMoveState : FSM_State
                 vel.Y = gravity * dt;
         }
 
-        // TODO: Implement a variable jump height
         // Handle jumping
         if (_jumpKeyBuffer > 0 && _controller.IsOnFloor())
             vel.Y = md.JumpVelocity;
