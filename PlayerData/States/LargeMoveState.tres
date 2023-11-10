@@ -5,6 +5,6 @@
 
 [resource]
 script = ExtResource("2_02l4o")
-_movementData = ExtResource("1_cpe4d")
+MovementData = ExtResource("1_cpe4d")
 _playerScale = 2.0
 StateName = "Large"

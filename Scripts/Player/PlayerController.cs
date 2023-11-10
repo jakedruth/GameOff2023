@@ -6,7 +6,7 @@ public partial class PlayerController : CharacterBody2D
 {
     public AnimatedSprite2D animatedSprite2D { get; private set; }
 
-    private FSM_Machine _stateMachine;
+    public FSM_Machine StateMachine { get; private set; }
 
     [Export] FSM_State[] _states;
 
@@ -14,19 +14,20 @@ public partial class PlayerController : CharacterBody2D
     public bool jumpKey;
     public bool onJumpKey;
     public bool facingRight;
+    public bool isInFan;
 
     public override void _Ready()
     {
         animatedSprite2D = GetChild<AnimatedSprite2D>(1);
         facingRight = animatedSprite2D.FlipH;
 
-        _stateMachine = new FSM_Machine(this);
+        StateMachine = new FSM_Machine(this);
         for (int i = 0; i < _states.Length; i++)
         {
-            _states[i].Init(_stateMachine);
+            _states[i].Init(StateMachine);
         }
 
-        _stateMachine.Ready(_states[0].StateName);
+        StateMachine.Ready(_states[0].StateName);
     }
 
     public override void _Process(double delta)
@@ -42,17 +43,17 @@ public partial class PlayerController : CharacterBody2D
         //  Or should I have only multiple move data resources that get switched around? I like this option better personally.
 
         if (Input.IsKeyLabelPressed(Key.Kp1))
-            _stateMachine.curretnState.Transition(_stateMachine.curretnState, "Small");
+            StateMachine.curretnState.Transition(StateMachine.curretnState, "Small");
 
         if (Input.IsKeyLabelPressed(Key.Kp2))
-            _stateMachine.curretnState.Transition(_stateMachine.curretnState, "Normal");
+            StateMachine.curretnState.Transition(StateMachine.curretnState, "Normal");
 
         if (Input.IsKeyLabelPressed(Key.Kp3))
-            _stateMachine.curretnState.Transition(_stateMachine.curretnState, "Large");
+            StateMachine.curretnState.Transition(StateMachine.curretnState, "Large");
 
 
         // Update the state machine
-        _stateMachine.Process(dt);
+        StateMachine.Process(dt);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -60,6 +61,6 @@ public partial class PlayerController : CharacterBody2D
         float dt = (float)delta;
 
         // Update the state machine
-        _stateMachine.PhysicsProcess(dt);
+        StateMachine.PhysicsProcess(dt);
     }
 }

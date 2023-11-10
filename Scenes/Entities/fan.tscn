@@ -67,7 +67,11 @@ frame_progress = 0.171603
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 modulate = Color(1, 1, 1, 0.447059)
 position = Vector2(8, 0)
+emitting = false
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_3qkbo")
 texture = ExtResource("3_haqyu")
 local_coords = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

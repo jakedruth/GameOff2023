@@ -7,9 +7,10 @@ public partial class PlayerMoveState : FSM_State
 {
     private PlayerController _controller;
 
-    [Export] MovementData _movementData;
+    [Export] public MovementData MovementData { get; private set; }
     [Export] float _playerScale;
     private float _jumpKeyBuffer;
+    private float maxY;
 
     public override void OnEnter()
     {
@@ -40,21 +41,41 @@ public partial class PlayerMoveState : FSM_State
 
     public override void PhysicsProcess(float dt)
     {
+        // Get current velocity
         Vector2 vel = _controller.Velocity;
 
         // Handle gravity
-        if (!_controller.IsOnFloor())
-            vel.Y += _movementData.GravityDown * dt;
-        else
-            vel.Y = _movementData.GravityDown * dt;
+        bool applyGravity = true;
+        float gravity = vel.Y >= 0 ? MovementData.GravityDown : MovementData.GravityUp;
+        if (_controller.isInFan)
+        {
+            if (MovementData.FanOverrideYSpeed)
+            {
+                vel.Y = Mathf.MoveToward(vel.Y, MovementData.FanOverrideYSpeedAmount, gravity * dt);
+                applyGravity = false;
+            }
+            else
+            {
+                gravity *= MovementData.GravityFanMultiplier;
+            }
+        }
+
+        if (applyGravity)
+        {
+            if (!_controller.IsOnFloor())
+                vel.Y += gravity * dt;
+            else
+                vel.Y = gravity * dt;
+        }
+
 
         // TODO: Implement a variable jump height
         // Handle jumping
         if (_jumpKeyBuffer > 0 && _controller.IsOnFloor())
-            vel.Y = _movementData.JumpVelocity;
+            vel.Y = MovementData.JumpVelocity;
 
         // Handle horizontal movementData
-        vel.X = Mathf.MoveToward(vel.X, _controller.movementInput.X * _movementData.MaxSpeed, _movementData.HorizontalAcceleration * dt);
+        vel.X = Mathf.MoveToward(vel.X, _controller.movementInput.X * MovementData.MaxSpeed, MovementData.HorizontalAcceleration * dt);
 
         // Update Position
         _controller.Velocity = vel;
@@ -76,6 +97,10 @@ public partial class PlayerMoveState : FSM_State
                 }
             }
         }
+
+        // Apply dampening
+        vel *= 0.95f;
+
         HandleSprite();
     }
 
@@ -85,7 +110,7 @@ public partial class PlayerMoveState : FSM_State
         if (_controller.IsOnFloor())
         {
             const float AVG_DT = 0.0166f;
-            float MINSPEED = _movementData.HorizontalAcceleration * AVG_DT * 1.1f;
+            float MINSPEED = MovementData.HorizontalAcceleration * AVG_DT * 1.1f;
             float hSpeed = Mathf.Abs(_controller.Velocity.X);
             if (hSpeed < MINSPEED && _controller.animatedSprite2D.Animation != "idle")
             {

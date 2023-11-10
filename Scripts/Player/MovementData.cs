@@ -11,6 +11,8 @@ public partial class MovementData : Resource
     private float _gravityUp;
     private float _gravityDown;
     private float _gravityFanMultiplier;
+    private bool _fanOverrideYSpeed;
+    private float _fanOverrideYSpeedAmount;
     private float _jumpVelocity;
 
     [Export] public float PlayerScale { get => _playerScale; private set => _playerScale = value; }
@@ -19,6 +21,8 @@ public partial class MovementData : Resource
     [Export] public float GravityUp { get => _gravityUp; private set => _gravityUp = value; }
     [Export] public float GravityDown { get => _gravityDown; private set => _gravityDown = value; }
     [Export] public float GravityFanMultiplier { get => _gravityFanMultiplier; private set => _gravityFanMultiplier = value; }
+    [Export] public bool FanOverrideYSpeed { get => _fanOverrideYSpeed; private set => _fanOverrideYSpeed = value; }
+    [Export] public float FanOverrideYSpeedAmount { get => _fanOverrideYSpeedAmount; private set => _fanOverrideYSpeedAmount = value; }
     [Export]
     public float JumpHeight
     {

@@ -5,6 +5,6 @@
 
 [resource]
 script = ExtResource("1_ypt8v")
-_movementData = ExtResource("1_trjt5")
+MovementData = ExtResource("1_trjt5")
 _playerScale = 1.0
 StateName = "Normal"
