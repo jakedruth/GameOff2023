@@ -1,0 +1,9 @@
+[ ] Add a pressure plate
+
+[ ] Add exit goal
+
+[ ] Add a key system
+
+[ ] Expand the state machine
+    [ ] Add a push state
+    [ ] Add a jump/ airborn state
