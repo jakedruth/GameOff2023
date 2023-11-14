@@ -41,6 +41,8 @@ public partial class PlayerMoveState : FSM_State
         Vector2 vel = _controller.Velocity;
         MovementData md = _controller.MovementData;
 
+        // TODO: Implement a timer for how long the jump key has been held
+        //      This would make it so the slow gravity can't be held the entire time.
         // Handle gravity
         bool applyGravity = true;
         float gravity = _controller.jumpKey ? md.GravityUp : _controller.MovementData.GravityDown;
