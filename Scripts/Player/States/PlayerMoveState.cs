@@ -103,14 +103,14 @@ public partial class PlayerMoveState : FSM_State
         _controller.animatedSprite2D.FlipH = !_controller.facingRight;
         if (_controller.IsOnFloor())
         {
-            const float AVG_DT = 0.0166f;
-            float MINSPEED = _controller.MovementData.HorizontalAcceleration * AVG_DT * 1.1f;
-            float hSpeed = Mathf.Abs(_controller.Velocity.X);
-            if (hSpeed < MINSPEED && _controller.animatedSprite2D.Animation != "idle")
+            const float DEAD_ZONE = 0.1f;
+            float hInput = Mathf.Abs(_controller.movementInput.X);
+
+            if (hInput <= DEAD_ZONE && _controller.animatedSprite2D.Animation != "idle")
             {
                 _controller.animatedSprite2D.Play("idle");
             }
-            else if (hSpeed >= MINSPEED && _controller.animatedSprite2D.Animation != "walk")
+            else if (hInput > DEAD_ZONE && _controller.animatedSprite2D.Animation != "walk")
             {
                 _controller.animatedSprite2D.Play("walk");
             }
