@@ -1,4 +1,15 @@
-[ ] Add a pressure plate
+[ ] Add a switch
+    A switch can set the on/off state of an object
+    [ ] Interactable switch
+    [ ] Preasure plate
+
+[ ] Add a button
+    Preforms an action, like always setting the state of an object to on
+
+[ ] Create one time directional walls/doors
+    Probably uses a button of sorts
+
+[ ] Collapsable platforms
 
 [ ] Add exit goal
 
