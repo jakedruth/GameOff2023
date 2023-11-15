@@ -4,7 +4,8 @@
 [ext_resource type="Script" path="res://Scripts/Pushable.cs" id="1_wxaoi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xc0c8"]
-size = Vector2(12, 12)
+custom_solver_bias = 1.0
+size = Vector2(16, 16)
 
 [node name="Box" type="StaticBody2D"]
 script = ExtResource("1_wxaoi")
@@ -16,7 +17,8 @@ shape = SubResource("RectangleShape2D_xc0c8")
 [node name="ImgHolder" type="Node2D" parent="."]
 
 [node name="Icon" type="Sprite2D" parent="ImgHolder"]
-scale = Vector2(0.094, 0.094)
+position = Vector2(-4.76837e-07, 7.15256e-07)
+scale = Vector2(0.125, 0.125)
 texture = ExtResource("1_pxd7r")
 
 [node name="RayCast2D_Center" type="RayCast2D" parent="."]

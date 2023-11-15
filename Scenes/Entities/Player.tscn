@@ -79,6 +79,7 @@ position = Vector2(0, -5.5)
 shape = SubResource("RectangleShape2D_i2rdh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 5
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_7s0qb")
 animation = &"midair_up"
