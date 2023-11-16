@@ -5,6 +5,7 @@ using System;
 public partial class MovementData : Resource
 {
     private float _playerScale;
+    private bool _canPush;
     private float _maxSpeed;
     private float _horizontalAcceleration;
     private float _jumpHeight;
@@ -16,6 +17,7 @@ public partial class MovementData : Resource
     private float _jumpVelocity;
 
     [Export] public float PlayerScale { get => _playerScale; private set => _playerScale = value; }
+    [Export] public bool CanPush { get => _canPush; private set => _canPush = value; }
     [Export] public float MaxSpeed { get => _maxSpeed; private set => _maxSpeed = value; }
     [Export] public float HorizontalAcceleration { get => _horizontalAcceleration; private set => _horizontalAcceleration = value; }
     [Export] public float GravityUp { get => _gravityUp; private set => _gravityUp = value; }

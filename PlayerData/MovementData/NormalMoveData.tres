@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_vitmm")
 PlayerScale = 1.0
+CanPush = false
 MaxSpeed = 90.0
 HorizontalAcceleration = 800.0
 GravityUp = 600.0

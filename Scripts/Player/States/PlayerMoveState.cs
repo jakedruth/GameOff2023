@@ -79,7 +79,7 @@ public partial class PlayerMoveState : FSM_State
         bool collided = _controller.MoveAndSlide();
 
         // Handle pushing pushable objects
-        if (collided)
+        if (collided && md.CanPush)
         {
             for (int i = 0; i < _controller.GetSlideCollisionCount(); i++)
             {
@@ -87,12 +87,12 @@ public partial class PlayerMoveState : FSM_State
                 if (collision.GetCollider() is Pushable pushable)
                 {
                     Vector2 normal = collision.GetNormal();
-                    if (Mathf.Abs(normal.X) >= Mathf.Abs(normal.Y))
-                    {
-                        Vector2 push = vel * dt;
-                        push.Y = 0;
-                        pushable.MoveAndCollide(push);
-                    }
+                    if (Mathf.Abs(normal.X) < Mathf.Abs(normal.Y))
+                        continue;
+
+                    Vector2 push = vel * dt;
+                    push.Y = 0;
+                    pushable.MoveAndCollide(push);
                 }
             }
         }

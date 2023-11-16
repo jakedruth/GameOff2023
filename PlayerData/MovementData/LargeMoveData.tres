@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_b7al8")
 PlayerScale = 2.0
+CanPush = true
 MaxSpeed = 45.0
 HorizontalAcceleration = 500.0
 GravityUp = 980.0
