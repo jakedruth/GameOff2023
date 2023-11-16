@@ -16,7 +16,6 @@ public partial class AirFlow : Area2D
     {
         if (body is PlayerController player)
         {
-            Console.WriteLine("Player has entered");
             player.isInFan = true;
             if (player.MovementData.FanOverrideYSpeed)
             {
@@ -33,7 +32,6 @@ public partial class AirFlow : Area2D
     {
         if (body is PlayerController player)
         {
-            Console.WriteLine("Player has exited");
             player.isInFan = false;
         }
     }
