@@ -10,10 +10,13 @@ public partial class FallingBlock : AnimatableBody2D
         WIGGLE,
         FALLING
     }
+    private Sprite2D _sprite2D;
+    private Vector2 _spritePos;
 
     private BlockState _blockState;
     private Vector2 _startPosition;
     [Export] public double wiggleTime;
+    [Export] public int wiggleCount;
     private double _timer;
     [Export] public float fallDistance;
     [Export] public float fallSpeed;
@@ -23,6 +26,8 @@ public partial class FallingBlock : AnimatableBody2D
     public override void _Ready()
     {
         base._Ready();
+        _sprite2D = GetChild<Sprite2D>(1);
+        _spritePos = _sprite2D.Position;
         _startPosition = Position;
     }
 
@@ -35,6 +40,7 @@ public partial class FallingBlock : AnimatableBody2D
     public void StartFalling()
     {
         _blockState = BlockState.FALLING;
+        _sprite2D.Position = _spritePos = new Vector2(0, 4);
     }
 
     public void Reset()
@@ -83,8 +89,9 @@ public partial class FallingBlock : AnimatableBody2D
                 break;
             case BlockState.WIGGLE:
                 // Handle wiggling
-
                 _timer -= delta;
+                _spritePos.X = (float)Mathf.Sin(2.0 * wiggleCount * Mathf.Pi * _timer / wiggleTime);
+                _sprite2D.Position = _spritePos;
                 if (_timer <= 0)
                     StartFalling();
 
