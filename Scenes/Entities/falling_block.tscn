@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/FallingBlock.cs" id="1_7c2j1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bg1b8"]
-size = Vector2(8, 8)
+size = Vector2(6, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5v5xi"]
 size = Vector2(6, 2)
