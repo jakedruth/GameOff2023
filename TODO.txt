@@ -1,13 +1,13 @@
 [ ] Add a switch
-    A switch can set the on/off state of an object
-    [ ] Interactable switch
-    [ ] Preasure plate
+	A switch can set the on/off state of an object
+	[ ] Interactable switch
+	[ ] Preasure plate
 
 [ ] Add a button
-    Preforms an action, like always setting the state of an object to on
+	Preforms an action, like always setting the state of an object to on
 
 [ ] Create one time directional walls/doors
-    Probably uses a button of sorts
+	Probably uses a button of sorts
 
 [ ] Collapsable platforms
 
@@ -16,5 +16,5 @@
 [ ] Add a key system
 
 [ ] Expand the state machine
-    [ ] Add a push state
-    [ ] Add a jump/ airborn state
+	[ ] Add a push state
+	[ ] Add a jump/ airborn state

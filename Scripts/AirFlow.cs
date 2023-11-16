@@ -9,6 +9,7 @@ public partial class AirFlow : Area2D
     {
         base._Ready();
         GetChild<GpuParticles2D>(2).Emitting = true;
+        GetChild<AnimatedSprite2D>(1).Play("idle");
     }
 
     public void _on_body_entered(Node2D body)

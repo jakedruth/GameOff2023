@@ -12,4 +12,4 @@ GravityDown = 1200.0
 GravityFanMultiplier = 0.5
 FanOverrideYSpeed = false
 FanOverrideYSpeedAmount = 0.0
-JumpHeight = 52.0
+JumpHeight = 48.0

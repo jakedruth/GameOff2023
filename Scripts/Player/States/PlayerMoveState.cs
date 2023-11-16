@@ -77,6 +77,8 @@ public partial class PlayerMoveState : FSM_State
         // Update Position
         _controller.Velocity = vel;
         bool collided = _controller.MoveAndSlide();
+
+        // Handle pushing pushable objects
         if (collided)
         {
             for (int i = 0; i < _controller.GetSlideCollisionCount(); i++)
