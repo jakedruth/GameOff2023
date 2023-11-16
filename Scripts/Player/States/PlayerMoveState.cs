@@ -120,10 +120,16 @@ public partial class PlayerMoveState : FSM_State
         {
             const float DEAD_ZONE = 0.1f;
             float hInput = Mathf.Abs(_controller.movementInput.X);
+            float vInput = _controller.movementInput.Y;
 
-            if (hInput <= DEAD_ZONE && _controller.animatedSprite2D.Animation != "idle")
+            if (hInput <= DEAD_ZONE)
             {
-                _controller.animatedSprite2D.Play("idle");
+                if (vInput < -DEAD_ZONE)
+                    _controller.animatedSprite2D.Play("look_up");
+                else if (vInput > DEAD_ZONE)
+                    _controller.animatedSprite2D.Play("look_down");
+                else if (_controller.animatedSprite2D.Animation != "idle")
+                    _controller.animatedSprite2D.Play("idle");
             }
             else if (hInput > DEAD_ZONE && _controller.animatedSprite2D.Animation != "walk")
             {
