@@ -6,6 +6,8 @@ public partial class Pushable : StaticBody2D
     private Node2D _imgHolder;
     private RayCast2D _rayCast2D;
 
+    // TODO: Have a max speed and acceleration to make the block
+    //          feel better, especially when falling.
     [Export] float velocity;
 
     public override void _Ready()
