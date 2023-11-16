@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b26vn55ay34td"]
+[gd_scene load_steps=12 format=3 uid="uid://b26vn55ay34td"]
 
 [ext_resource type="Texture2D" uid="uid://cxkob7y8uffjw" path="res://Resources/8x8.png" id="1_yxv41"]
 [ext_resource type="PackedScene" uid="uid://cvnospxfmgq6n" path="res://Scenes/Entities/Player.tscn" id="2_rihss"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dvrmacrtlnw70" path="res://Scenes/Entities/fan.tscn" id="5_qrct2"]
 [ext_resource type="PackedScene" uid="uid://dsmvi8ll6tbuw" path="res://Scenes/Entities/falling_block.tscn" id="6_lhi68"]
 [ext_resource type="PackedScene" uid="uid://der0ygmj4dqfj" path="res://Scenes/Entities/moving_platform.tscn" id="6_plkor"]
+[ext_resource type="PackedScene" uid="uid://ctkuyktu610g6" path="res://Scenes/Entities/Door.tscn" id="7_fdcum"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_dqne6"]
 tile_data = PackedInt32Array(65536, 262146, 0, 1, 262146, 0, 65537, 327682, 3)
@@ -437,3 +438,6 @@ position = Vector2(76, 64)
 
 [node name="FallingBlock12" parent="." instance=ExtResource("6_lhi68")]
 position = Vector2(68, 64)
+
+[node name="Area2D" parent="." instance=ExtResource("7_fdcum")]
+position = Vector2(256, 56)

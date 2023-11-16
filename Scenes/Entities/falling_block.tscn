@@ -16,7 +16,8 @@ script = ExtResource("1_7c2j1")
 wiggleTime = 0.5
 wiggleCount = 2
 fallDistance = 32.0
-fallSpeed = 16.0
+fallSpeed = 32.0
+disapearTime = 0.25
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)

@@ -8,7 +8,8 @@ public partial class FallingBlock : AnimatableBody2D
     {
         NORMAL,
         WIGGLE,
-        FALLING
+        FALLING,
+        DISAPEARING
     }
     private Sprite2D _sprite2D;
     private Vector2 _spritePos;
@@ -20,6 +21,7 @@ public partial class FallingBlock : AnimatableBody2D
     private double _timer;
     [Export] public float fallDistance;
     [Export] public float fallSpeed;
+    [Export] public double disapearTime;
 
     private PlayerController _playerController;
 
@@ -43,6 +45,13 @@ public partial class FallingBlock : AnimatableBody2D
         _sprite2D.Position = _spritePos = new Vector2(0, 4);
     }
 
+    public void StartDisapearing()
+    {
+        _blockState = BlockState.DISAPEARING;
+        CollisionLayer = 0;
+        _timer = disapearTime;
+    }
+
     public void Reset()
     {
         Position = _startPosition;
@@ -60,7 +69,7 @@ public partial class FallingBlock : AnimatableBody2D
 
     public void _on_area_2d_body_exited(Node2D body)
     {
-        if (body is PlayerController player)
+        if (body is PlayerController)
         {
             _playerController = null;
         }
@@ -100,9 +109,15 @@ public partial class FallingBlock : AnimatableBody2D
                 Vector2 step = Vector2.Down * fallSpeed * (float)delta;
                 MoveAndCollide(step);
                 if (Position.Y - _startPosition.Y >= fallDistance)
-                {
+                    StartDisapearing();
+                break;
+            case BlockState.DISAPEARING:
+                _timer -= delta;
+                float t = 1 - (float)(_timer / disapearTime);
+                t = Mathf.Clamp(t, 0, 1);
+                Scale = Vector2.One.Lerp(Vector2.Zero, t);
+                if (t == 0)
                     Free();
-                }
                 break;
         }
     }

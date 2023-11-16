@@ -78,26 +78,39 @@ public partial class PlayerMoveState : FSM_State
         _controller.Velocity = vel;
         bool collided = _controller.MoveAndSlide();
 
-        // Handle pushing pushable objects
-        if (collided && md.CanPush)
-        {
-            for (int i = 0; i < _controller.GetSlideCollisionCount(); i++)
-            {
-                var collision = _controller.GetSlideCollision(i);
-                if (collision.GetCollider() is Pushable pushable)
-                {
-                    Vector2 normal = collision.GetNormal();
-                    if (Mathf.Abs(normal.X) < Mathf.Abs(normal.Y))
-                        continue;
+        if (collided)
+            HandleCollisions(md, vel, dt);
 
-                    Vector2 push = vel * dt;
-                    push.Y = 0;
-                    pushable.MoveAndCollide(push);
+        HandleSprite();
+    }
+
+    private void HandleCollisions(MovementData md, Vector2 vel, float dt)
+    {
+        for (int i = 0; i < _controller.GetSlideCollisionCount(); i++)
+        {
+            KinematicCollision2D collision = _controller.GetSlideCollision(i);
+
+            if (md.CanPush && collision.GetCollider() is Pushable pushable)
+            {
+                Vector2 normal = collision.GetNormal();
+                if (Mathf.Abs(normal.X) < Mathf.Abs(normal.Y))
+                    continue;
+
+                Vector2 push = vel * dt;
+                push.Y = 0;
+                pushable.MoveAndCollide(push);
+            }
+
+            if (_controller.IsOnFloor() && collision.GetColliderShape() is CollisionShape2D shape)
+            {
+                if (shape.OneWayCollision && _controller.movementInput.Y > 0.5f)
+                {
+                    Vector2 pos = _controller.Position;
+                    pos.Y += 2;
+                    _controller.Position = pos;
                 }
             }
         }
-
-        HandleSprite();
     }
 
     private void HandleSprite()
