@@ -69,10 +69,17 @@ public partial class PlayerMoveState : FSM_State
 
         // Handle jumping
         if (_jumpKeyBuffer > 0 && _controller.IsOnFloor())
+        {
             vel.Y = md.JumpVelocity;
+            _jumpKeyBuffer = 0;
+        }
 
         // Handle horizontal movementData
-        vel.X = Mathf.MoveToward(vel.X, _controller.movementInput.X * md.MaxSpeed, md.HorizontalAcceleration * dt);
+        float acc = _controller.IsOnFloor()
+            ? md.HorizontalAcceleration
+            : (md.HorizontalAcceleration * 0.5f); // TODO: Move hard coded value to movementData resource
+
+        vel.X = Mathf.MoveToward(vel.X, _controller.movementInput.X * md.MaxSpeed, acc * dt);
 
         // Update Position
         _controller.Velocity = vel;

@@ -42,7 +42,7 @@ public partial class PlayerController : CharacterBody2D
         jumpKey = Input.IsActionPressed("jump");
         onJumpKey = Input.IsActionJustPressed("jump");
 
-        // Debug How to change sizes
+        // Debug to change sizes
         if (Input.IsKeyLabelPressed(Key.Kp1))
             SwitchMovementData(0);
 
@@ -51,6 +51,11 @@ public partial class PlayerController : CharacterBody2D
 
         if (Input.IsKeyLabelPressed(Key.Kp3))
             SwitchMovementData(2);
+
+        if (Input.IsKeyLabelPressed(Key.R))
+        {
+            GetNode<SceneManager>("/root/SceneManager").GoToScene(0);
+        }
 
         // Update the state machine
         StateMachine.Process(dt);
