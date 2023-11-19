@@ -1,7 +1,7 @@
-[ ] Add a switch
+[x] Add a system for switching things on and off
 	A switch can set the on/off state of an object
-	[ ] Interactable switch
-	[ ] Preasure plate
+	[x] Interactable
+	[x] Switch
 
 [ ] Add a button ???
 	Preforms an action, like always setting the state of an object to on
@@ -9,12 +9,26 @@
 [ ] Create one time directional walls/doors
 	Probably uses a button of sorts
 
-[ ] Collapsable platforms
+[x] Collapsable platforms
 
-[ ] Add exit goal
+[x] Add exit goal
 
-[ ] Add a key system
+[x] Add a key system
 
 [ ] Expand the state machine
 	[ ] Add a push state
 	[ ] Add a jump/ airborn state
+
+[ ] Add water physics
+	possible good tutorial
+	https://www.youtube.com/watch?v=RXIRkou021U
+
+[ ] Implement the vertical slice
+	This includes starting a level and selecting which scale to use.
+	Handle saving the level layout inbetween finishing a level.
+
+[ ] Upload Build to Itch.io
+	[ ] Make a Build
+	[ ] Make Itch page
+	[ ] Upload Build
+	[ ] Test build

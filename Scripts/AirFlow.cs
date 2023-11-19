@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+// TODO: Implement the interface IInteractable
+
 public partial class AirFlow : Area2D
 {
     [Export] private float _launchSpeed;
