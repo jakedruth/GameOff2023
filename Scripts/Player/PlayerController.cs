@@ -43,16 +43,16 @@ public partial class PlayerController : CharacterBody2D
         onJumpKey = Input.IsActionJustPressed("jump");
 
         // Debug to change sizes
-        if (Input.IsKeyLabelPressed(Key.Kp1))
+        if (Input.IsKeyLabelPressed(Godot.Key.Kp1))
             SwitchMovementData(0);
 
-        if (Input.IsKeyLabelPressed(Key.Kp2))
+        if (Input.IsKeyLabelPressed(Godot.Key.Kp2))
             SwitchMovementData(1);
 
-        if (Input.IsKeyLabelPressed(Key.Kp3))
+        if (Input.IsKeyLabelPressed(Godot.Key.Kp3))
             SwitchMovementData(2);
 
-        if (Input.IsKeyLabelPressed(Key.R))
+        if (Input.IsKeyLabelPressed(Godot.Key.R))
         {
             GetNode<SceneManager>("/root/SceneManager").GoToScene(0);
         }

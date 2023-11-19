@@ -18,16 +18,13 @@ public partial class Door : Area2D
             _playerController = null;
     }
 
-    public override void _Process(double delta)
+    public void OpenDoor()
     {
-        if (_isOpen || _playerController == null)
+        if (_isOpen)
             return;
 
-        if (_playerController.movementInput.Y < -0.5f)
-        {
-            _isOpen = true;
-            Rect2 rect = new Rect2(0, 24, 24, 24);
-            GetChild<Sprite2D>(1).RegionRect = rect;
-        }
+        _isOpen = true;
+        Rect2 rect = new Rect2(0, 24, 24, 24);
+        GetChild<Sprite2D>(1).RegionRect = rect;
     }
 }

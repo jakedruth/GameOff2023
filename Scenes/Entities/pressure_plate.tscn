@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0gfnkst1p80h"]
+
+[ext_resource type="Texture2D" uid="uid://cxkob7y8uffjw" path="res://Resources/8x8.png" id="1_b0sbi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ks0j7"]
+size = Vector2(12, 4)
+
+[node name="PressurePlate" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_ks0j7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -4)
+texture = ExtResource("1_b0sbi")
+region_enabled = true
+region_rect = Rect2(48, 32, 16, 8)

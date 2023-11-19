@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/FallingBlock.cs" id="1_7c2j1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bg1b8"]
-size = Vector2(6, 8)
+size = Vector2(6, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5v5xi"]
 size = Vector2(6, 2)
@@ -20,11 +20,12 @@ fallSpeed = 32.0
 disapearTime = 0.25
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4)
+position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_bg1b8")
 one_way_collision = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.568627, 0.00392157, 0.976471, 1)
 position = Vector2(0, 4)
 texture = ExtResource("1_3wt48")
 region_enabled = true
