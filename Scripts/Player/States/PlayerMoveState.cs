@@ -93,7 +93,6 @@ public partial class PlayerMoveState : FSM_State
 
     private void HandleCollisions(MovementData md, Vector2 vel, float dt)
     {
-        GD.Print(_controller.GetSlideCollisionCount());
         for (int i = 0; i < _controller.GetSlideCollisionCount(); i++)
         {
             KinematicCollision2D collision = _controller.GetSlideCollision(i);
@@ -118,17 +117,12 @@ public partial class PlayerMoveState : FSM_State
 
                 if (!canDropThrough && collision.GetCollider() is TileMap tileMap)
                 {
-                    GD.Print($"CollisionPosition: {collision.GetPosition()}\tPosition: {_controller.GlobalPosition}");
-
-                    // Vector2 dir = (collision.GetPosition() - (_controller.GlobalPosition + Vector2.Up * 4)).Normalized();
-                    // GD.Print($"Dir: {dir}");
                     float xDelta = Mathf.Sign(collision.GetPosition().X - _controller.GlobalPosition.X);
                     Vector2I coord = tileMap.LocalToMap(_controller.GlobalPosition + Vector2.Down);
                     TileData data = tileMap.GetCellTileData(0, coord);
                     if (data == null)
                     {
                         int offset = Mathf.RoundToInt(xDelta);
-                        // GD.Print(offset);
                         coord.X += offset;
                         data = tileMap.GetCellTileData(0, coord);
                         if (data == null)

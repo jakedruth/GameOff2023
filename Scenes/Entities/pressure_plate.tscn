@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0gfnkst1p80h"]
+[gd_scene load_steps=4 format=3 uid="uid://c0gfnkst1p80h"]
 
 [ext_resource type="Texture2D" uid="uid://cxkob7y8uffjw" path="res://Resources/8x8.png" id="1_b0sbi"]
+[ext_resource type="Script" path="res://Scripts/PressurePlate.cs" id="1_t20po"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ks0j7"]
-size = Vector2(12, 4)
+size = Vector2(12, 2)
 
-[node name="PressurePlate" type="Area2D"]
+[node name="PressurePlate" type="Area2D" node_paths=PackedStringArray("interatableNodes")]
+script = ExtResource("1_t20po")
+interatableNodes = []
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
