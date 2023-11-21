@@ -5,11 +5,12 @@
 [resource]
 script = ExtResource("1_1yi1l")
 PlayerScale = 0.5
+CanPush = false
 MaxSpeed = 110.0
 HorizontalAcceleration = 2000.0
 GravityUp = 200.0
 GravityDown = 980.0
+JumpHeight = 28.0
 GravityFanMultiplier = 1.0
 FanOverrideYSpeed = true
 FanOverrideYSpeedAmount = -50.0
-JumpHeight = 20.0

@@ -23,6 +23,18 @@
 	possible good tutorial
 	https://www.youtube.com/watch?v=RXIRkou021U
 
+[ ] Saving and Loading
+	Completed levels
+
+[ ] Main Menu
+	Play & Quit
+	Maybe options if I have time.
+		Sound Mixer
+		Resolution? (Maybe just keep as a window that can be resized)
+
+[ ] Level Select Menu
+	Display if beat or not
+
 [ ] Implement the vertical slice
 	This includes starting a level and selecting which scale to use.
 	Handle saving the level layout inbetween finishing a level.
