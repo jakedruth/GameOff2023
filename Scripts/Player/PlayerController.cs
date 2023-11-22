@@ -54,7 +54,7 @@ public partial class PlayerController : CharacterBody2D
 
         if (Input.IsKeyLabelPressed(Godot.Key.R))
         {
-            GetNode<SceneManager>("/root/SceneManager").GoToScene(0);
+            GetNode<SceneManager>("/root/SceneManager").ResetLevel();
         }
 
         // Update the state machine

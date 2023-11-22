@@ -26,7 +26,7 @@
 [ ] Saving and Loading
 	Completed levels
 
-[ ] Main Menu
+[x] Main Menu
 	Play & Quit
 	Maybe options if I have time.
 		Sound Mixer

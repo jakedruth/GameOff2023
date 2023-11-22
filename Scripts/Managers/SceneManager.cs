@@ -7,6 +7,7 @@ public partial class SceneManager : Node
     private BuildSettings _buildSettings;
 
     public Node CurrentScene { get; private set; }
+    public int CurrentSceneIndex { get; private set; }
 
     public override void _Ready()
     {
@@ -18,13 +19,20 @@ public partial class SceneManager : Node
         CurrentScene = root.GetChild(root.GetChildCount() - 1);
     }
 
+    public void ResetLevel()
+    {
+        GoToScene(CurrentSceneIndex);
+    }
+
     public void GoToScene(int index)
     {
         CallDeferred(MethodName.DefferedGoToScene, index);
     }
 
-    public void DefferedGoToScene(int index)
+    private void DefferedGoToScene(int index)
     {
+        CurrentSceneIndex = index;
+
         // Free the CurrentScene from memeory
         CurrentScene.Free();
 
@@ -39,5 +47,10 @@ public partial class SceneManager : Node
 
         // Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.
         GetTree().CurrentScene = CurrentScene;
+    }
+
+    public void QuitGame()
+    {
+        GetTree().Quit();
     }
 }
