@@ -74,4 +74,9 @@ public partial class PlayerController : CharacterBody2D
         MovementData = _movementDatas[index];
         Scale = Vector2.One * MovementData.PlayerScale;
     }
+
+    public void SwitchState()
+    {
+
+    }
 }

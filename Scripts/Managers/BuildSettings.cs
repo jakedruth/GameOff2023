@@ -4,7 +4,7 @@ using System;
 [GlobalClass]
 public partial class BuildSettings : Resource
 {
-	[Export(PropertyHint.File)] private string[] levelPaths;
+	[Export] private string[] levelPaths;
 
 	public PackedScene GetLevel(int index)
 	{

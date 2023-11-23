@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="IdleState" load_steps=2 format=3 uid="uid://cv3sawig41rn"]
+
+[ext_resource type="Script" path="res://Scripts/Player/States/IdleState.cs" id="1_4skgi"]
+
+[resource]
+script = ExtResource("1_4skgi")
+StateName = "idle"

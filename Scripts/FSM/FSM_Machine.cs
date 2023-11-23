@@ -19,7 +19,7 @@ namespace FSM
         public void AddState(FSM_State state)
         {
             _states.Add(state.StateName.ToLower(), state);
-            state.Transition += OnStateTransition;
+            state.TransitionToState += TransitionToState;
         }
 
         public void Ready(string startState)
@@ -38,19 +38,20 @@ namespace FSM
             curretnState?.PhysicsProcess(dt);
         }
 
-        private void OnStateTransition(FSM_State sender, string targetState)
+        public void TransitionToState(string targetState)
         {
-            if (sender != curretnState)
-                return;
-
             FSM_State nextState = _states[targetState.ToLower()];
+            TransitionToState(nextState);
+        }
 
-            if (curretnState == nextState)
+        public void TransitionToState(FSM_State targetState)
+        {
+            if (curretnState == targetState)
                 return;
 
             curretnState?.OnExit();
-            nextState?.OnEnter();
-            curretnState = nextState;
+            targetState?.OnEnter();
+            curretnState = targetState;
         }
     }
 
@@ -65,7 +66,7 @@ namespace FSM
             Machine.AddState(this);
         }
 
-        public Action<FSM_State, string> Transition;
+        public Action<string> TransitionToState;
 
         public abstract void OnEnter();
         public abstract void OnExit();

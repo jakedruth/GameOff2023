@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_65owl")
-StateName = "Walk"
+StateName = "walk"

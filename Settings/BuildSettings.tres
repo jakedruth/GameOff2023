@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BuildSettings" load_steps=2 format=3 uid="uid://c1854hmglkiji"]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c1854hmglkiji"]
 
 [ext_resource type="Script" path="res://Scripts/Managers/BuildSettings.cs" id="1_rjavn"]
 

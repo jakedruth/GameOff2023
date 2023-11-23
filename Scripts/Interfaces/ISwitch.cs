@@ -1,7 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 
-public interface Switch
+public interface ISwitch
 {
     public bool CurrentState { get; set; }
     public List<IInteractable> Interactables { get; set; }
