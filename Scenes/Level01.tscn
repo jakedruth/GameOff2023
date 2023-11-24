@@ -1,11 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://b26vn55ay34td"]
+[gd_scene load_steps=16 format=3 uid="uid://b26vn55ay34td"]
 
 [ext_resource type="Script" path="res://Scripts/LevelHandler.cs" id="1_8auge"]
 [ext_resource type="Texture2D" uid="uid://cxkob7y8uffjw" path="res://Resources/8x8.png" id="1_yxv41"]
-[ext_resource type="Script" path="res://Scripts/Menus/HUD.cs" id="2_nrcws"]
+[ext_resource type="PackedScene" uid="uid://djbhyks1ihamp" path="res://Scenes/Menus/hud.tscn" id="2_cf12x"]
 [ext_resource type="PackedScene" uid="uid://cvnospxfmgq6n" path="res://Scenes/Entities/Player.tscn" id="2_rihss"]
-[ext_resource type="Theme" uid="uid://bh73gr63wepny" path="res://Settings/HUDTheme.tres" id="3_a7t6c"]
-[ext_resource type="FontFile" uid="uid://8q3o3ee5uccn" path="res://Resources/Kenney Mini.ttf" id="4_5rvsn"]
 [ext_resource type="PackedScene" uid="uid://c7u6to6cb1f4m" path="res://Scenes/Entities/box.tscn" id="4_ketsn"]
 [ext_resource type="PackedScene" uid="uid://dvrmacrtlnw70" path="res://Scenes/Entities/fan.tscn" id="5_qrct2"]
 [ext_resource type="PackedScene" uid="uid://dsmvi8ll6tbuw" path="res://Scenes/Entities/falling_block.tscn" id="6_lhi68"]
@@ -393,60 +391,10 @@ _data = {
 }
 point_count = 2
 
-[node name="Stage" type="Node2D"]
+[node name="Stage" type="Node2D" groups=["LevelHandler"]]
 script = ExtResource("1_8auge")
 
-[node name="HUD" type="Control" parent="."]
-z_index = 50
-layout_mode = 3
-anchors_preset = 0
-offset_right = 320.0
-offset_bottom = 184.0
-script = ExtResource("2_nrcws")
-
-[node name="SelectCharacter" type="ColorRect" parent="HUD"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.0392157, 0.0392157, 0.0392157, 0.584314)
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/SelectCharacter"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -107.0
-offset_top = -48.0
-offset_right = 108.0
-offset_bottom = -17.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/separation = 16
-alignment = 1
-
-[node name="Shrink" type="Button" parent="HUD/SelectCharacter/HBoxContainer"]
-layout_mode = 2
-theme = ExtResource("3_a7t6c")
-theme_override_fonts/font = ExtResource("4_5rvsn")
-text = "Shrink"
-
-[node name="Normal" type="Button" parent="HUD/SelectCharacter/HBoxContainer"]
-layout_mode = 2
-theme = ExtResource("3_a7t6c")
-theme_override_fonts/font = ExtResource("4_5rvsn")
-text = "Normal"
-
-[node name="Grow" type="Button" parent="HUD/SelectCharacter/HBoxContainer"]
-layout_mode = 2
-theme = ExtResource("3_a7t6c")
-theme_override_fonts/font = ExtResource("4_5rvsn")
-text = "Grow
-"
+[node name="HUD" parent="." instance=ExtResource("2_cf12x")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(160, 90)
@@ -476,8 +424,6 @@ curve = SubResource("Curve2D_1oky5")
 [node name="MovingPlatform" parent="Path2D" instance=ExtResource("6_plkor")]
 speed = 30.0
 waitAtWayPointTime = 1.0
-loop = null
-CurrentState = null
 
 [node name="FallingBlock" parent="." instance=ExtResource("6_lhi68")]
 position = Vector2(156, 64)
@@ -500,14 +446,15 @@ position = Vector2(116, 64)
 [node name="Door" parent="." instance=ExtResource("7_fdcum")]
 position = Vector2(256, 56)
 
-[node name="Node2D" parent="." instance=ExtResource("8_dm0ek")]
+[node name="Key" parent="." instance=ExtResource("8_dm0ek")]
 position = Vector2(176, 51)
+
+[node name="Key2" parent="." instance=ExtResource("8_dm0ek")]
+position = Vector2(208, 96)
+
+[node name="Key3" parent="." instance=ExtResource("8_dm0ek")]
+position = Vector2(288, 160)
 
 [node name="PressurePlate" parent="." node_paths=PackedStringArray("interatableNodes") instance=ExtResource("9_8n37y")]
 position = Vector2(120, 168)
-CurrentState = null
 interatableNodes = [NodePath("../Path2D/MovingPlatform")]
-
-[connection signal="pressed" from="HUD/SelectCharacter/HBoxContainer/Shrink" to="HUD" method="OnPlayLevel" binds= [0]]
-[connection signal="pressed" from="HUD/SelectCharacter/HBoxContainer/Normal" to="HUD" method="OnPlayLevel" binds= [1]]
-[connection signal="pressed" from="HUD/SelectCharacter/HBoxContainer/Grow" to="HUD" method="OnPlayLevel" binds= [2]]

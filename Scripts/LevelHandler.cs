@@ -3,6 +3,8 @@ using System;
 
 public partial class LevelHandler : Node2D
 {
+    private HUD _hud;
+
     public int Round { get; private set; }
     public int CurrentSize { get; private set; }
 
@@ -11,6 +13,9 @@ public partial class LevelHandler : Node2D
 
     public override void _Ready()
     {
+        _hud = GetChild<HUD>(0);
+        _hud.DisplayCharacterSelect();
+
         _player = GetTree().GetFirstNodeInGroup("Player") as PlayerController;
         if (_player == null)
             throw new Exception("Could not locate player ndoe");
@@ -27,11 +32,18 @@ public partial class LevelHandler : Node2D
         Round++;
         if (Round >= 3)
         {
-            // TODO: Handle completing last Round
+            CompletedLevel();
             return;
         }
 
         SetUpRound();
+    }
+
+    private void CompletedLevel()
+    {
+        // TODO: Handle completing last Round
+        _player.StateMachine.TransitionToState("idle");
+        _hud.DisplayLevelComplete();
     }
 
     public void RedoRound()
@@ -42,13 +54,15 @@ public partial class LevelHandler : Node2D
     private void SetUpRound()
     {
         _player.GlobalPosition = _playerSpawnPoint;
+        _player.StateMachine.TransitionToState("idle");
+        _hud.DisplayCharacterSelect();
     }
 
     public void SelectSize(int size)
     {
-        GD.Print($"LevelHandler.SelectSize() : {size}");
         CurrentSize = size;
         _player.SwitchMovementData(size);
         _player.StateMachine.TransitionToState("walk");
+        _hud.SetSizeButtonDisabled((HUD.ButtonSelector)size, true);
     }
 }

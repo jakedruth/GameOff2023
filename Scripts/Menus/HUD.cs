@@ -3,32 +3,75 @@ using System;
 
 public partial class HUD : Control
 {
-    private Control _selectCharacterHolder;
+    public enum ButtonSelector { SHRINK, NORMAL, GROW }
+
+    [ExportGroup("Select Character")]
+    [Export] private Control selectCharacterHolder;
+    [Export] private Button shrinkButton;
+    [Export] private Button normalButton;
+    [Export] private Button GrowButton;
+    [ExportGroup("Level Complete")]
+    [Export] private Control levelCompleteHolder;
+    [Export] private Button levelCompleteButton;
 
     public override void _Ready()
     {
-        _selectCharacterHolder = GetChild(0) as Control;
+        HideCharacterSelect();
+        HideLevelComplete();
     }
 
     public void DisplayCharacterSelect()
     {
-        _selectCharacterHolder.Show();
-        _selectCharacterHolder.ProcessMode = ProcessModeEnum.Inherit;
+        selectCharacterHolder.Show();
+        selectCharacterHolder.ProcessMode = ProcessModeEnum.Inherit;
     }
 
     public void HideCharacterSelect()
     {
-        GD.Print("Here");
-        _selectCharacterHolder.Hide();
-        _selectCharacterHolder.ProcessMode = ProcessModeEnum.Disabled;
+        selectCharacterHolder.Hide();
+        selectCharacterHolder.ProcessMode = ProcessModeEnum.Disabled;
+    }
+
+    public void SetSizeButtonDisabled(ButtonSelector selector, bool value)
+    {
+        Button refButton;
+        switch (selector)
+        {
+            default:
+            case ButtonSelector.SHRINK:
+                refButton = shrinkButton;
+                break;
+            case ButtonSelector.NORMAL:
+                refButton = normalButton;
+                break;
+            case ButtonSelector.GROW:
+                refButton = GrowButton;
+                break;
+        }
+
+        refButton.Disabled = value;
+
+        if (value)
+            refButton.GetChild<Node2D>(0).Hide();
+        else
+            refButton.GetChild<Node2D>(0).Show();
+    }
+
+    public void DisplayLevelComplete()
+    {
+        levelCompleteHolder.Show();
+        levelCompleteHolder.ProcessMode = ProcessModeEnum.Inherit;
+    }
+
+    public void HideLevelComplete()
+    {
+        levelCompleteHolder.Hide();
+        levelCompleteHolder.ProcessMode = ProcessModeEnum.Disabled;
     }
 
     public void OnPlayLevel(int size)
     {
-        GD.Print($"HUD.OnPlayLevel() : {size}");
-
         HideCharacterSelect();
-
         GetParent<LevelHandler>().SelectSize(size);
     }
 }

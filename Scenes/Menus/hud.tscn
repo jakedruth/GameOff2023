@@ -1,0 +1,143 @@
+[gd_scene load_steps=5 format=3 uid="uid://djbhyks1ihamp"]
+
+[ext_resource type="Script" path="res://Scripts/Menus/HUD.cs" id="1_ew5ef"]
+[ext_resource type="Theme" uid="uid://bh73gr63wepny" path="res://Settings/HUDTheme.tres" id="2_cu8s0"]
+[ext_resource type="FontFile" uid="uid://8q3o3ee5uccn" path="res://Resources/Kenney Mini.ttf" id="3_mx352"]
+[ext_resource type="Texture2D" uid="uid://bonv2hioqmnbg" path="res://Resources/player.png" id="4_43i0s"]
+
+[node name="HUD" type="Control" node_paths=PackedStringArray("selectCharacterHolder", "shrinkButton", "normalButton", "GrowButton", "levelCompleteHolder")]
+z_index = 50
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 184.0
+script = ExtResource("1_ew5ef")
+selectCharacterHolder = NodePath("SelectCharacter")
+shrinkButton = NodePath("SelectCharacter/HBoxContainer/Shrink")
+normalButton = NodePath("SelectCharacter/HBoxContainer/Normal")
+GrowButton = NodePath("SelectCharacter/HBoxContainer/Grow")
+levelCompleteHolder = NodePath("Level Complete")
+
+[node name="SelectCharacter" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0392157, 0.0392157, 0.0392157, 0.584314)
+
+[node name="Label" type="Label" parent="SelectCharacter"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 32.0
+offset_bottom = 64.0
+grow_horizontal = 2
+theme = ExtResource("2_cu8s0")
+text = "Select your character's scale"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SelectCharacter"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -107.0
+offset_top = -48.0
+offset_right = 108.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Shrink" type="Button" parent="SelectCharacter/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_cu8s0")
+theme_override_fonts/font = ExtResource("3_mx352")
+text = "Shrink"
+
+[node name="Sprite2D" type="Sprite2D" parent="SelectCharacter/HBoxContainer/Shrink"]
+position = Vector2(34.5, -8)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_43i0s")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="Normal" type="Button" parent="SelectCharacter/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_cu8s0")
+theme_override_fonts/font = ExtResource("3_mx352")
+text = "Normal"
+
+[node name="Sprite2D" type="Sprite2D" parent="SelectCharacter/HBoxContainer/Normal"]
+position = Vector2(40.5, -12)
+texture = ExtResource("4_43i0s")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="Grow" type="Button" parent="SelectCharacter/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_cu8s0")
+theme_override_fonts/font = ExtResource("3_mx352")
+text = "Grow
+"
+
+[node name="Sprite2D" type="Sprite2D" parent="SelectCharacter/HBoxContainer/Grow"]
+position = Vector2(34.5, -20)
+scale = Vector2(2, 2)
+texture = ExtResource("4_43i0s")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="Level Complete" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0392157, 0.0392157, 0.0392157, 0.584314)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Level Complete"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -107.0
+offset_top = -48.0
+offset_right = 108.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Continue" type="Button" parent="Level Complete/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_cu8s0")
+theme_override_fonts/font = ExtResource("3_mx352")
+text = "Continue"
+
+[node name="Label" type="Label" parent="Level Complete"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 32.0
+offset_bottom = 64.0
+grow_horizontal = 2
+theme = ExtResource("2_cu8s0")
+text = "Level Completed"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="SelectCharacter/HBoxContainer/Shrink" to="." method="OnPlayLevel" binds= [0]]
+[connection signal="pressed" from="SelectCharacter/HBoxContainer/Normal" to="." method="OnPlayLevel" binds= [1]]
+[connection signal="pressed" from="SelectCharacter/HBoxContainer/Grow" to="." method="OnPlayLevel" binds= [2]]
