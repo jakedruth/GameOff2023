@@ -23,6 +23,7 @@
 [ ] Expand the state machine
 	[ ] Add a push state
 	[ ] Add a jump/ airborn state
+	[ ] remove them as resources
 
 [ ] Add water physics
 	possible good tutorial

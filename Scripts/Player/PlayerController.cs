@@ -8,7 +8,7 @@ public partial class PlayerController : CharacterBody2D
 
     public FSM_Machine StateMachine { get; private set; }
 
-    [Export] FSM_State[] _states;
+    private FSM_State[] _states;
     [Export] MovementData[] _movementDatas;
     public MovementData MovementData { get; private set; }
 
@@ -24,10 +24,10 @@ public partial class PlayerController : CharacterBody2D
         facingRight = animatedSprite2D.FlipH;
 
         StateMachine = new FSM_Machine(this);
-        for (int i = 0; i < _states.Length; i++)
-        {
-            _states[i].Init(StateMachine);
-        }
+        _states = new FSM_State[] {
+            new IdleState(StateMachine),
+            new PlayerMoveState(StateMachine)
+        };
 
         SwitchMovementData(1);
         StateMachine.Ready(_states[0].StateName);

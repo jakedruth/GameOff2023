@@ -2,12 +2,17 @@ using System;
 using FSM;
 using Godot;
 
-[GlobalClass]
 public partial class PlayerMoveState : FSM_State
 {
+    public override string StateName => "walk";
+
     private PlayerController _controller;
     private float _jumpKeyBuffer;
     private float maxY;
+
+    public PlayerMoveState(FSM_Machine machine) : base(machine)
+    {
+    }
 
     public override void OnEnter()
     {

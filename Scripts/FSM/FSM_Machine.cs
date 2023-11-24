@@ -55,12 +55,12 @@ namespace FSM
         }
     }
 
-    public abstract partial class FSM_State : Resource
+    public abstract partial class FSM_State
     {
         public FSM_Machine Machine { get; private set; }
-        [Export] public virtual string StateName { get; protected set; }
+        public abstract string StateName { get; }
 
-        public void Init(FSM_Machine machine)
+        public FSM_State(FSM_Machine machine)
         {
             Machine = machine;
             Machine.AddState(this);

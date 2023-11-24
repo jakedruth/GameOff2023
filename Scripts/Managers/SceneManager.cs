@@ -4,7 +4,7 @@ using System;
 [Tool]
 public partial class SceneManager : Node
 {
-    private BuildSettings _buildSettings;
+    private Resource _buildSettings;
 
     public Node CurrentScene { get; private set; }
     public int CurrentSceneIndex { get; private set; }
@@ -12,11 +12,12 @@ public partial class SceneManager : Node
     public override void _Ready()
     {
         // Get the build settings
-        _buildSettings = GD.Load<BuildSettings>("res://Settings/BuildSettings.tres");
+        _buildSettings = GD.Load("res://Settings/BuildSettings.tres");
 
         // Autoloaded nodes are always first, the last child of root is always the loaded scene.
         Viewport root = GetTree().Root;
         CurrentScene = root.GetChild(root.GetChildCount() - 1);
+
     }
 
     public void ResetLevel()
@@ -37,7 +38,7 @@ public partial class SceneManager : Node
         CurrentScene.Free();
 
         // Get the next scene from the build settings
-        PackedScene nextScene = _buildSettings.GetLevel(index);
+        PackedScene nextScene = (_buildSettings as BuildSettings).GetLevel(index);
 
         // Instantiate the next scene
         CurrentScene = nextScene.Instantiate();
