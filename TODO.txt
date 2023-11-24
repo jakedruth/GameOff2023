@@ -1,3 +1,8 @@
+[ ] Remove the use of interfaces
+	based on a hunch, it is the cause of godot not being able to
+	complete the assembly reloading properly. It is potentially the 
+	use of c# based resources. Which would suck...
+
 [x] Add a system for switching things on and off
 	A switch can set the on/off state of an object
 	[x] Interactable

@@ -41,7 +41,6 @@ public partial class LevelHandler : Node2D
 
     private void CompletedLevel()
     {
-        // TODO: Handle completing last Round
         _player.StateMachine.TransitionToState("idle");
         _hud.DisplayLevelComplete();
     }
