@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://bh73gr63wepny"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://bh73gr63wepny"]
 
 [ext_resource type="FontFile" uid="uid://8q3o3ee5uccn" path="res://Resources/Kenney Mini.ttf" id="1_dfjmy"]
 [ext_resource type="Texture2D" uid="uid://bfgulqajfgywe" path="res://Resources/grey.png" id="2_27mdy"]
@@ -15,6 +15,22 @@ texture_margin_top = 5.0
 texture_margin_right = 5.0
 texture_margin_bottom = 5.0
 modulate_color = Color(0, 0.0862745, 0.117647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fi22o"]
+bg_color = Color(1, 1, 1, 1)
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 6
+border_color = Color(0.996078, 0.521569, 0, 1)
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 7.0
+anti_aliasing = false
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c8sah"]
 content_margin_left = 10.0
@@ -52,6 +68,8 @@ texture_margin_bottom = 5.0
 modulate_color = Color(1, 0.941176, 0.831373, 1)
 
 [resource]
+default_font = ExtResource("1_dfjmy")
+default_font_size = 16
 Button/colors/font_color = Color(0, 0.12549, 0.180392, 1)
 Button/colors/font_focus_color = Color(0, 0.12549, 0.180392, 1)
 Button/colors/font_hover_color = Color(0, 0.12549, 0.180392, 1)
@@ -59,6 +77,7 @@ Button/colors/font_hover_pressed_color = Color(0, 0.12549, 0.180392, 1)
 Button/colors/font_pressed_color = Color(0, 0.12549, 0.180392, 1)
 Button/fonts/font = ExtResource("1_dfjmy")
 Button/styles/disabled = SubResource("StyleBoxTexture_0hens")
+Button/styles/focus = SubResource("StyleBoxFlat_fi22o")
 Button/styles/hover = SubResource("StyleBoxTexture_c8sah")
 Button/styles/normal = SubResource("StyleBoxTexture_etpv8")
 Button/styles/pressed = SubResource("StyleBoxTexture_s5h31")

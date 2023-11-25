@@ -1,9 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c2vx6lim1j3ax"]
+[gd_scene load_steps=5 format=3 uid="uid://c2vx6lim1j3ax"]
 
 [ext_resource type="Script" path="res://Scripts/Menus/MainMenu.cs" id="1_x5xmn"]
-[ext_resource type="Texture2D" uid="uid://bfgulqajfgywe" path="res://Resources/grey.png" id="2_ipc45"]
-[ext_resource type="Texture2D" uid="uid://c6lmf7hbe6h2j" path="res://Resources/grey_pressed.png" id="3_riiy2"]
-[ext_resource type="LabelSettings" uid="uid://duqcn3axdjsxm" path="res://Settings/LabelSetting.tres" id="4_0pnwe"]
+[ext_resource type="Theme" uid="uid://bh73gr63wepny" path="res://Settings/HUDTheme.tres" id="3_ja54d"]
 [ext_resource type="FontFile" uid="uid://8q3o3ee5uccn" path="res://Resources/Kenney Mini.ttf" id="5_25pce"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gbhn3"]
@@ -41,56 +39,30 @@ vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 12
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -56.0
-offset_top = -100.0
-offset_right = 56.0
+offset_left = 120.0
+offset_top = -84.0
+offset_right = -120.0
+offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(56, 48)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="Play" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="MarginContainer/VBoxContainer2"]
 layout_mode = 2
-texture_normal = ExtResource("2_ipc45")
-texture_pressed = ExtResource("3_riiy2")
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Play"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+theme = ExtResource("3_ja54d")
 text = "Play"
-label_settings = ExtResource("4_0pnwe")
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="Quit" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer2"]
 layout_mode = 2
-texture_normal = ExtResource("2_ipc45")
-texture_pressed = ExtResource("3_riiy2")
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Quit"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+theme = ExtResource("3_ja54d")
 text = "Quit"
-label_settings = ExtResource("4_0pnwe")
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="OnPlayPressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="OnQuitPressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer2/PlayButton" to="." method="OnPlayPressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer2/QuitButton" to="." method="OnQuitPressed"]

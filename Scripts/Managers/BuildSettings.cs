@@ -4,16 +4,36 @@ using System;
 [GlobalClass]
 public partial class BuildSettings : Resource
 {
-	[Export] private string[] _levelPaths { get; set; }
+	[Export] private string mainMenuPath;
+	[Export] private string levelSelectPath;
+	[Export] private LevelInfo[] levels { get; set; }
 
 	public BuildSettings()
 	{
-		_levelPaths = new string[0];
+		levels = new LevelInfo[0];
+	}
+
+	public PackedScene GetMainMenu()
+	{
+		if (GD.Load(mainMenuPath) is PackedScene scene)
+			return scene;
+
+		// Handle bad path
+		return null;
+	}
+
+	public PackedScene GetLevelSelect()
+	{
+		if (GD.Load(levelSelectPath) is PackedScene scene)
+			return scene;
+
+		// Handle bad path
+		return null;
 	}
 
 	public PackedScene GetLevel(int index)
 	{
-		string path = _levelPaths[index];
+		string path = levels[index].path;
 		if (GD.Load(path) is PackedScene scene)
 			return scene;
 

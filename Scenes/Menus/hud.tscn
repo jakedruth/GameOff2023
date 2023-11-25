@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://8q3o3ee5uccn" path="res://Resources/Kenney Mini.ttf" id="3_mx352"]
 [ext_resource type="Texture2D" uid="uid://bonv2hioqmnbg" path="res://Resources/player.png" id="4_43i0s"]
 
-[node name="HUD" type="Control" node_paths=PackedStringArray("selectCharacterHolder", "shrinkButton", "normalButton", "GrowButton", "levelCompleteHolder")]
+[node name="HUD" type="Control" node_paths=PackedStringArray("selectCharacterHolder", "shrinkButton", "normalButton", "GrowButton", "levelCompleteHolder", "levelCompleteButton") groups=["HUD"]]
 z_index = 50
 layout_mode = 3
 anchors_preset = 0
@@ -17,6 +17,7 @@ shrinkButton = NodePath("SelectCharacter/HBoxContainer/Shrink")
 normalButton = NodePath("SelectCharacter/HBoxContainer/Normal")
 GrowButton = NodePath("SelectCharacter/HBoxContainer/Grow")
 levelCompleteHolder = NodePath("Level Complete")
+levelCompleteButton = NodePath("Level Complete/HBoxContainer/Continue")
 
 [node name="SelectCharacter" type="ColorRect" parent="."]
 layout_mode = 1
@@ -104,6 +105,18 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0392157, 0.0392157, 0.0392157, 0.584314)
 
+[node name="Label" type="Label" parent="Level Complete"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 32.0
+offset_bottom = 64.0
+grow_horizontal = 2
+theme = ExtResource("2_cu8s0")
+text = "Level Completed"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="HBoxContainer" type="HBoxContainer" parent="Level Complete"]
 layout_mode = 1
 anchors_preset = 7
@@ -125,18 +138,6 @@ layout_mode = 2
 theme = ExtResource("2_cu8s0")
 theme_override_fonts/font = ExtResource("3_mx352")
 text = "Continue"
-
-[node name="Label" type="Label" parent="Level Complete"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 32.0
-offset_bottom = 64.0
-grow_horizontal = 2
-theme = ExtResource("2_cu8s0")
-text = "Level Completed"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [connection signal="pressed" from="SelectCharacter/HBoxContainer/Shrink" to="." method="OnPlayLevel" binds= [0]]
 [connection signal="pressed" from="SelectCharacter/HBoxContainer/Normal" to="." method="OnPlayLevel" binds= [1]]

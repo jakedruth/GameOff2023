@@ -22,23 +22,38 @@ public partial class SceneManager : Node
 
     public void ResetLevel()
     {
-        GoToScene(CurrentSceneIndex);
+        if (CurrentSceneIndex < 0)
+            return;
+
+        GoToLevel(CurrentSceneIndex);
     }
 
-    public void GoToScene(int index)
+    public void GoToMainMenu()
     {
-        CallDeferred(MethodName.DefferedGoToScene, index);
+        PackedScene nextScene = (_buildSettings as BuildSettings).GetMainMenu();
+        CallDeferred(MethodName.DefferedGoToLevel, nextScene);
     }
 
-    private void DefferedGoToScene(int index)
+    public void GoToLevelSelect()
+    {
+        PackedScene nextScene = (_buildSettings as BuildSettings).GetLevelSelect();
+        CallDeferred(MethodName.DefferedGoToLevel, nextScene);
+    }
+
+    public void GoToLevel(int index)
+    {
+        // Get the next scene from the build settings
+        PackedScene nextScene = (_buildSettings as BuildSettings).GetLevel(index);
+
+        CallDeferred(MethodName.DefferedGoToLevel, nextScene, index);
+    }
+
+    private void DefferedGoToLevel(PackedScene nextScene, int index = -1)
     {
         CurrentSceneIndex = index;
 
         // Free the CurrentScene from memeory
         CurrentScene.Free();
-
-        // Get the next scene from the build settings
-        PackedScene nextScene = (_buildSettings as BuildSettings).GetLevel(index);
 
         // Instantiate the next scene
         CurrentScene = nextScene.Instantiate();

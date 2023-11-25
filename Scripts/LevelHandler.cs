@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public partial class LevelHandler : Node2D
 {
@@ -10,6 +12,15 @@ public partial class LevelHandler : Node2D
 
     private PlayerController _player;
     private Vector2 _playerSpawnPoint;
+
+    [Export] Node stageHolder { get; set; }
+    private PackedScene _roundScene;
+
+    private List<Node> allRoundNodes;
+    [ExportGroup("Round specific objects")]
+    [Export] public Node[] round1nodes;
+    [Export] public Node[] round2nodes;
+    [Export] public Node[] round3nodes;
 
     public override void _Ready()
     {
@@ -23,6 +34,15 @@ public partial class LevelHandler : Node2D
         _playerSpawnPoint = _player.GlobalPosition;
         Round = 0;
         CurrentSize = -1;
+
+        allRoundNodes = new List<Node>();
+        allRoundNodes.AddRange(round1nodes);
+        allRoundNodes.AddRange(round2nodes);
+        allRoundNodes.AddRange(round3nodes);
+        foreach (Node node in allRoundNodes)
+        {
+            node.TreeExiting += () => { allRoundNodes.Remove(node); };
+        }
 
         SetUpRound();
     }
@@ -45,16 +65,32 @@ public partial class LevelHandler : Node2D
         _hud.DisplayLevelComplete();
     }
 
-    public void RedoRound()
-    {
-        // SetUpRound();
-    }
-
     private void SetUpRound()
     {
-        _player.GlobalPosition = _playerSpawnPoint;
         _player.StateMachine.TransitionToState("idle");
         _hud.DisplayCharacterSelect();
+
+        _player.GlobalPosition = _playerSpawnPoint;
+        foreach (Node node in allRoundNodes)
+        {
+            if (!node.IsInsideTree())
+                continue;
+
+            Node[] roundNodes = Round == 0
+                    ? round1nodes
+                    : Round == 1
+                        ? round2nodes
+                        : round3nodes;
+
+            // Handle each case
+            if (node is Key key)
+            {
+                if (roundNodes.Contains(node))
+                    key.ShowKey();
+                else
+                    key.HideKey();
+            }
+        }
     }
 
     public void SelectSize(int size)

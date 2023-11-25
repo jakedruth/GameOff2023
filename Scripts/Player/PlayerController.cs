@@ -9,7 +9,7 @@ public partial class PlayerController : CharacterBody2D
     public FSM_Machine StateMachine { get; private set; }
 
     private FSM_State[] _states;
-    [Export] MovementData[] _movementDatas;
+    [Export] public MovementData[] _movementDatas { get; private set; }
     public MovementData MovementData { get; private set; }
 
     public Vector2 movementInput;

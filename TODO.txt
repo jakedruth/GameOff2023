@@ -1,4 +1,6 @@
 [ ] Remove the use of interfaces
+	No longer a priority, it was the resources being loaded on open of Godot
+	The following is wrong:
 	based on a hunch, it is the cause of godot not being able to
 	complete the assembly reloading properly. It is potentially the 
 	use of c# based resources. Which would suck...
@@ -23,7 +25,7 @@
 [ ] Expand the state machine
 	[ ] Add a push state
 	[ ] Add a jump/ airborn state
-	[ ] remove them as resources
+	[x] remove them as resources
 
 [ ] Add water physics
 	possible good tutorial

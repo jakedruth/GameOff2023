@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c731vuam4o714"]
+[gd_scene load_steps=10 format=3 uid="uid://c731vuam4o714"]
 
 [ext_resource type="Script" path="res://Scripts/Key.cs" id="1_4lbot"]
 [ext_resource type="Texture2D" uid="uid://cxkob7y8uffjw" path="res://Resources/8x8.png" id="1_owu6u"]
@@ -6,17 +6,65 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dwa0x"]
 size = Vector2(14, 8)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_35pp4"]
+atlas = ExtResource("1_owu6u")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yn74c"]
+atlas = ExtResource("1_owu6u")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcjn2"]
+atlas = ExtResource("1_owu6u")
+region = Rect2(80, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqrd3"]
+atlas = ExtResource("1_owu6u")
+region = Rect2(80, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mfnv"]
+atlas = ExtResource("1_owu6u")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hwoon"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35pp4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yn74c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcjn2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqrd3")
+}],
+"loop": true,
+"name": &"hide",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8mfnv")
+}],
+"loop": true,
+"name": &"show",
+"speed": 5.0
+}]
+
 [node name="Key" type="Area2D"]
 position = Vector2(64, 0)
 collision_layer = 0
 script = ExtResource("1_4lbot")
 p1Height = 48.0
-timeToPlayer = 0.5
+moveTime = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_dwa0x")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_owu6u")
-region_enabled = true
-region_rect = Rect2(48, 16, 16, 16)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hwoon")
+animation = &"hide"
+frame_progress = 0.334422

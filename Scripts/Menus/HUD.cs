@@ -18,12 +18,19 @@ public partial class HUD : Control
     {
         HideCharacterSelect();
         HideLevelComplete();
+        Show();
     }
 
     public void DisplayCharacterSelect()
     {
         selectCharacterHolder.Show();
         selectCharacterHolder.ProcessMode = ProcessModeEnum.Inherit;
+        if (!shrinkButton.Disabled)
+            shrinkButton.GrabFocus();
+        else if (!normalButton.Disabled)
+            normalButton.GrabFocus();
+        else
+            GrowButton.GrabFocus();
     }
 
     public void HideCharacterSelect()
@@ -61,6 +68,7 @@ public partial class HUD : Control
     {
         levelCompleteHolder.Show();
         levelCompleteHolder.ProcessMode = ProcessModeEnum.Inherit;
+        levelCompleteButton.GrabFocus();
     }
 
     public void HideLevelComplete()

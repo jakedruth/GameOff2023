@@ -8,7 +8,7 @@ public partial class PlayerMoveState : FSM_State
 
     private PlayerController _controller;
     private float _jumpKeyBuffer;
-    private float maxY;
+    // private float maxYSpeed;
 
     public PlayerMoveState(FSM_Machine machine) : base(machine)
     {

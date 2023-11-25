@@ -4,18 +4,26 @@ using System.Collections.Generic;
 
 public partial class Key : Area2D
 {
+    private AnimatedSprite2D _animatedSprite2D;
+
+    private uint _startMask;
     private Door _door;
     private QubicBezierCurve _curve;
 
+    [Export] string defaultAnimation = "show";
     [Export] float p1Height;
-    [Export] double timeToPlayer;
+    [Export] double moveTime;
     private double _timer;
     private int _rotateDir;
     private float _startScale;
 
     public override void _Ready()
     {
+        _animatedSprite2D = GetChild<AnimatedSprite2D>(1);
+        _animatedSprite2D.Play(defaultAnimation);
         BodyEntered += OnBodyEntered;
+
+        _startMask = CollisionMask;
     }
 
     private void OnBodyEntered(Node2D body)
@@ -38,7 +46,7 @@ public partial class Key : Area2D
             return;
 
         _timer += delta;
-        float t = (float)Mathf.Clamp(_timer / timeToPlayer, 0, 1);
+        float t = (float)Mathf.Clamp(_timer / moveTime, 0, 1);
 
         //_curve.p3 = _door.Position;
         Position = _curve.Sample(t);
@@ -65,5 +73,17 @@ public partial class Key : Area2D
         Vector2 p1 = GlobalPosition + Vector2.Up * p1Height;
         Vector2 p3 = _door.GlobalPosition + Vector2.Up * 8;
         _curve = new QubicBezierCurve(GlobalPosition, p1, p1, p3);
+    }
+
+    public void ShowKey()
+    {
+        _animatedSprite2D.Play("show");
+        CollisionMask = _startMask;
+    }
+
+    public void HideKey()
+    {
+        _animatedSprite2D.Play("hide");
+        CollisionMask = 0;
     }
 }
