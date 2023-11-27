@@ -7,12 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://ctkuyktu610g6" path="res://Scenes/Entities/Door.tscn" id="5_t0dxv"]
 [ext_resource type="PackedScene" uid="uid://c731vuam4o714" path="res://Scenes/Entities/Key.tscn" id="6_176ng"]
 
-[node name="Stage" type="Node2D" node_paths=PackedStringArray("round1nodes", "round2nodes", "round3nodes") groups=["LevelHandler"]]
+[node name="Stage" type="Node2D" node_paths=PackedStringArray("stageHolder") groups=["LevelHandler"]]
 process_mode = 3
 script = ExtResource("1_nivsd")
-round1nodes = []
-round2nodes = []
-round3nodes = []
+stageHolder = NodePath("StageHolder")
 
 [node name="HUD" parent="." instance=ExtResource("2_mumh3")]
 visible = false

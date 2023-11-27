@@ -10,6 +10,7 @@ public partial class Key : Area2D
     private Door _door;
     private QubicBezierCurve _curve;
 
+    [Export(PropertyHint.Range, "0,4")] int revealInRound;
     [Export] string defaultAnimation = "show";
     [Export] float p1Height;
     [Export] double moveTime;
@@ -22,6 +23,7 @@ public partial class Key : Area2D
         _animatedSprite2D = GetChild<AnimatedSprite2D>(1);
         _animatedSprite2D.Play(defaultAnimation);
         BodyEntered += OnBodyEntered;
+        ((LevelHandler)GetTree().GetFirstNodeInGroup("LevelHandler")).OnRoundStart += HandleOnRoundStart;
 
         _startMask = CollisionMask;
     }
@@ -57,9 +59,11 @@ public partial class Key : Area2D
 
         if (t >= 1)
         {
+            // Remove Listener
+            ((LevelHandler)GetTree().GetFirstNodeInGroup("LevelHandler")).OnRoundStart -= HandleOnRoundStart;
+
             // Open the door
-            Door door = GetTree().GetFirstNodeInGroup("Door") as Door;
-            door.OpenDoor();
+            _door.OpenDoor();
 
             // Remove from the scene
             Free();
@@ -85,5 +89,13 @@ public partial class Key : Area2D
     {
         _animatedSprite2D.Play("hide");
         CollisionMask = 0;
+    }
+
+    public void HandleOnRoundStart(int round)
+    {
+        if (round >= revealInRound)
+            ShowKey();
+        else
+            HideKey();
     }
 }

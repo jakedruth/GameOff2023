@@ -11,8 +11,7 @@ public partial class LevelSelect : Control
         Node mainLevelInfoHolder = container.GetChild(0);
 
         SceneManager manager = GetNode<SceneManager>("/root/SceneManager");
-        BuildSettings buildSettings = manager.GetBuildSettings();
-        int count = buildSettings.LevelCount;
+        int count = manager.GetNumberOfLevels();
 
         firstButton.GrabFocus();
 
@@ -29,7 +28,7 @@ public partial class LevelSelect : Control
                 : manager.GameData.GetValue<bool>($"level{i}");
             bool beaten = manager.GameData.GetValue<bool>($"level{i + 1}");
 
-            LevelInfo info = buildSettings.GetLevelInfo(i);
+            LevelInfo info = manager.GetLevelInfo(i);
             Node holder = container.GetChild(i);
 
             Label title = holder.GetChild<Label>(1);

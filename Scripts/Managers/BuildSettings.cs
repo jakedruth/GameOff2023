@@ -6,13 +6,14 @@ public partial class BuildSettings : Resource
 {
 	[Export] private string mainMenuPath;
 	[Export] private string levelSelectPath;
-	[Export] private LevelInfo[] levels { get; set; }
-	public int LevelCount => levels.Length;
+	[Export] Godot.Collections.Array<LevelInfo> levels { get; set; }
+
+	public int LevelCount => levels.Count;
 	public LevelInfo GetLevelInfo(int index) => levels[index];
 
 	public BuildSettings()
 	{
-		levels = new LevelInfo[0];
+		levels = new Godot.Collections.Array<LevelInfo>();
 	}
 
 	public PackedScene GetMainMenu()

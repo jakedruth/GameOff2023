@@ -18,12 +18,10 @@ _data = {
 }
 point_count = 2
 
-[node name="Stage" type="Node2D" node_paths=PackedStringArray("round1nodes", "round2nodes", "round3nodes") groups=["LevelHandler"]]
+[node name="Stage" type="Node2D" node_paths=PackedStringArray("stageHolder") groups=["LevelHandler"]]
 process_mode = 3
 script = ExtResource("1_cw16m")
-round1nodes = [NodePath("StageHolder/Key")]
-round2nodes = [NodePath("StageHolder/Key2")]
-round3nodes = [NodePath("StageHolder/Key3")]
+stageHolder = NodePath("StageHolder")
 
 [node name="HUD" parent="." instance=ExtResource("2_fe7au")]
 visible = false
@@ -81,12 +79,15 @@ position = Vector2(256, 56)
 
 [node name="Key" parent="StageHolder" instance=ExtResource("10_vyrxl")]
 position = Vector2(176, 51)
+revealInRound = 1
 
 [node name="Key2" parent="StageHolder" instance=ExtResource("10_vyrxl")]
 position = Vector2(208, 96)
+revealInRound = 3
 
 [node name="Key3" parent="StageHolder" instance=ExtResource("10_vyrxl")]
 position = Vector2(288, 160)
+revealInRound = 2
 
 [node name="PressurePlate" parent="StageHolder" node_paths=PackedStringArray("interatableNodes") instance=ExtResource("11_tjxpc")]
 position = Vector2(120, 168)

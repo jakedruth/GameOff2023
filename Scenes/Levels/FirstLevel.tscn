@@ -8,12 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://c731vuam4o714" path="res://Scenes/Entities/Key.tscn" id="6_dtt1x"]
 [ext_resource type="Theme" uid="uid://bh73gr63wepny" path="res://Settings/HUDTheme.tres" id="7_vguji"]
 
-[node name="Stage" type="Node2D" node_paths=PackedStringArray("round1nodes", "round2nodes", "round3nodes") groups=["LevelHandler"]]
+[node name="Stage" type="Node2D" node_paths=PackedStringArray("stageHolder") groups=["LevelHandler"]]
 process_mode = 3
 script = ExtResource("1_dc6hh")
-round1nodes = [NodePath("StageHolder/Key3")]
-round2nodes = [NodePath("StageHolder/Key1")]
-round3nodes = [NodePath("StageHolder/Key2"), NodePath("StageHolder/Label")]
+stageHolder = NodePath("StageHolder")
 
 [node name="HUD" parent="." instance=ExtResource("2_2eam2")]
 visible = false
@@ -40,13 +38,16 @@ floor_snap_length = 4.0
 position = Vector2(284, 96)
 
 [node name="Key1" parent="StageHolder" instance=ExtResource("6_dtt1x")]
-position = Vector2(152, 84)
+position = Vector2(152, 36)
+revealInRound = 1
 
 [node name="Key2" parent="StageHolder" instance=ExtResource("6_dtt1x")]
-position = Vector2(152, 156)
+position = Vector2(152, 76)
+revealInRound = 2
 
 [node name="Key3" parent="StageHolder" instance=ExtResource("6_dtt1x")]
-position = Vector2(152, 36)
+position = Vector2(152, 156)
+revealInRound = 3
 
 [node name="Label" type="Label" parent="StageHolder"]
 offset_left = 8.0

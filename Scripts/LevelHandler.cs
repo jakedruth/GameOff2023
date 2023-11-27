@@ -16,11 +16,7 @@ public partial class LevelHandler : Node2D
     [Export] Node stageHolder { get; set; }
     private PackedScene _roundScene;
 
-    private List<Node> allRoundNodes;
-    [ExportGroup("Round specific objects")]
-    [Export] public Node[] round1nodes;
-    [Export] public Node[] round2nodes;
-    [Export] public Node[] round3nodes;
+    [Signal] public delegate void OnRoundStartEventHandler(int round);
 
     public override void _Ready()
     {
@@ -32,17 +28,8 @@ public partial class LevelHandler : Node2D
             throw new Exception("Could not locate player ndoe");
 
         _playerSpawnPoint = _player.GlobalPosition;
-        Round = 0;
+        Round = 1;
         CurrentSize = -1;
-
-        allRoundNodes = new List<Node>();
-        allRoundNodes.AddRange(round1nodes);
-        allRoundNodes.AddRange(round2nodes);
-        allRoundNodes.AddRange(round3nodes);
-        foreach (Node node in allRoundNodes)
-        {
-            node.TreeExiting += () => { allRoundNodes.Remove(node); };
-        }
 
         SetUpRound();
     }
@@ -50,7 +37,7 @@ public partial class LevelHandler : Node2D
     public void CompletedRound()
     {
         Round++;
-        if (Round >= 3)
+        if (Round > 3)
         {
             CompletedLevel();
             return;
@@ -74,44 +61,45 @@ public partial class LevelHandler : Node2D
         _hud.DisplayCharacterSelect();
 
         _player.GlobalPosition = _playerSpawnPoint;
-        foreach (Node node in allRoundNodes)
-        {
-            if (!node.IsInsideTree())
-                continue;
+        // foreach (Node node in allRoundNodes)
+        // {
+        //     if (!node.IsInsideTree())
+        //         continue;
 
-            Node[] roundNodes = Round == 0
-                    ? round1nodes
-                    : Round == 1
-                        ? round2nodes
-                        : round3nodes;
+        //     Node[] roundNodes = Round == 0
+        //             ? round1nodes
+        //             : Round == 1
+        //                 ? round2nodes
+        //                 : round3nodes;
 
-            // Handle each case
-            if (node is Key key)
-            {
-                if (roundNodes.Contains(node))
-                    key.ShowKey();
-                else
-                    key.HideKey();
+        //     // Handle each case
+        //     if (node is Key key)
+        //     {
+        //         if (roundNodes.Contains(node))
+        //             key.ShowKey();
+        //         else
+        //             key.HideKey();
 
-                continue;
-            }
+        //         continue;
+        //     }
 
-            if (node is Control control)
-            {
-                if (roundNodes.Contains(node))
-                {
-                    control.Show();
-                    control.ProcessMode = ProcessModeEnum.Inherit;
-                }
-                else
-                {
-                    control.Hide();
-                    control.ProcessMode = ProcessModeEnum.Disabled;
-                }
+        //     if (node is Control control)
+        //     {
+        //         if (roundNodes.Contains(node))
+        //         {
+        //             control.Show();
+        //             control.ProcessMode = ProcessModeEnum.Inherit;
+        //         }
+        //         else
+        //         {
+        //             control.Hide();
+        //             control.ProcessMode = ProcessModeEnum.Disabled;
+        //         }
+        //         continue;
+        //     }
+        // }
 
-                continue;
-            }
-        }
+        EmitSignal(SignalName.OnRoundStart, Round);
     }
 
     public void SelectSize(int size)

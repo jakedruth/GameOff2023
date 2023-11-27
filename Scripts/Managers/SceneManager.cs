@@ -77,9 +77,14 @@ public partial class SceneManager : Node
         GetTree().Quit();
     }
 
-    public BuildSettings GetBuildSettings()
+    public int GetNumberOfLevels()
     {
-        return (BuildSettings)_buildSettings;
+        return (_buildSettings as BuildSettings).LevelCount;
+    }
+
+    public LevelInfo GetLevelInfo(int i)
+    {
+        return (_buildSettings as BuildSettings).GetLevelInfo(i);
     }
 
     public void BeatCurrentLevel()
