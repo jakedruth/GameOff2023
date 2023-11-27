@@ -61,12 +61,15 @@ public partial class LevelHandler : Node2D
 
     private void CompletedLevel()
     {
+        GetNode<SceneManager>("/root/SceneManager").BeatCurrentLevel();
+
         _player.StateMachine.TransitionToState("idle");
         _hud.DisplayLevelComplete();
     }
 
     private void SetUpRound()
     {
+        UnPause();
         _player.StateMachine.TransitionToState("idle");
         _hud.DisplayCharacterSelect();
 
@@ -89,6 +92,24 @@ public partial class LevelHandler : Node2D
                     key.ShowKey();
                 else
                     key.HideKey();
+
+                continue;
+            }
+
+            if (node is Control control)
+            {
+                if (roundNodes.Contains(node))
+                {
+                    control.Show();
+                    control.ProcessMode = ProcessModeEnum.Inherit;
+                }
+                else
+                {
+                    control.Hide();
+                    control.ProcessMode = ProcessModeEnum.Disabled;
+                }
+
+                continue;
             }
         }
     }
@@ -99,5 +120,25 @@ public partial class LevelHandler : Node2D
         _player.SwitchMovementData(size);
         _player.StateMachine.TransitionToState("walk");
         _hud.SetSizeButtonDisabled((HUD.ButtonSelector)size, true);
+    }
+
+    public void TogglePause()
+    {
+        if (GetTree().Paused)
+            UnPause();
+        else
+            Pause();
+    }
+
+    public void Pause()
+    {
+        GetTree().Paused = true;
+        _hud.ShowPauseMenu();
+    }
+
+    public void UnPause()
+    {
+        GetTree().Paused = false;
+        _hud.HidePauseMenu();
     }
 }

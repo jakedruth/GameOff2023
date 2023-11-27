@@ -8,6 +8,9 @@ size = Vector2(32, 8)
 
 [node name="Platfrom" type="AnimatableBody2D"]
 script = ExtResource("1_01g8l")
+speed = 30.0
+waitAtWayPointTime = 1.0
+loop = true
 onColor = Color(1, 1, 1, 1)
 offColor = Color(0.4, 0.4, 0.4, 1)
 

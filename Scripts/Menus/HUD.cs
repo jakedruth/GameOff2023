@@ -13,11 +13,15 @@ public partial class HUD : Control
     [ExportGroup("Level Complete")]
     [Export] private Control levelCompleteHolder;
     [Export] private Button levelCompleteButton;
+    [ExportGroup("Pause Screen")]
+    [Export] private Control pauseScreenHolder;
+    [Export] private Button continueGameButton;
 
     public override void _Ready()
     {
         HideCharacterSelect();
         HideLevelComplete();
+        HidePauseMenu();
         Show();
     }
 
@@ -37,6 +41,19 @@ public partial class HUD : Control
     {
         selectCharacterHolder.Hide();
         selectCharacterHolder.ProcessMode = ProcessModeEnum.Disabled;
+    }
+
+    public void ShowPauseMenu()
+    {
+        pauseScreenHolder.Show();
+        pauseScreenHolder.ProcessMode = ProcessModeEnum.Inherit;
+        continueGameButton.GrabFocus();
+    }
+
+    public void HidePauseMenu()
+    {
+        pauseScreenHolder.Hide();
+        pauseScreenHolder.ProcessMode = ProcessModeEnum.Disabled;
     }
 
     public void SetSizeButtonDisabled(ButtonSelector selector, bool value)
@@ -81,5 +98,20 @@ public partial class HUD : Control
     {
         HideCharacterSelect();
         GetParent<LevelHandler>().SelectSize(size);
+    }
+
+    public void UnPause()
+    {
+        GetNode<SceneManager>("/root/SceneManager").UnPause();
+    }
+
+    public void GoToLevelSelect()
+    {
+        GetNode<SceneManager>("/root/SceneManager").GoToLevelSelect();
+    }
+
+    public void ResetLevel()
+    {
+        GetNode<SceneManager>("/root/SceneManager").ResetLevel();
     }
 }

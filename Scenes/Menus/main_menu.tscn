@@ -26,8 +26,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -112.0
+offset_top = 7.0
 offset_right = 112.0
-offset_bottom = 80.0
+offset_bottom = 87.0
 grow_horizontal = 2
 scale = Vector2(0.83, 0.83)
 pivot_offset = Vector2(104, 0)
@@ -43,21 +44,27 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 120.0
-offset_top = -84.0
-offset_right = -120.0
+offset_left = 104.0
+offset_top = -50.0
+offset_right = -104.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
-pivot_offset = Vector2(56, 48)
+pivot_offset = Vector2(56, 14)
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer2" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="PlayButton" type="Button" parent="MarginContainer/VBoxContainer2"]
 layout_mode = 2
 theme = ExtResource("3_ja54d")
 text = "Play"
+
+[node name="ClearData" type="Button" parent="MarginContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("3_ja54d")
+text = "Clear Save Data"
 
 [node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer2"]
 layout_mode = 2
@@ -65,4 +72,6 @@ theme = ExtResource("3_ja54d")
 text = "Quit"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer2/PlayButton" to="." method="OnPlayPressed"]
+[connection signal="ready" from="MarginContainer/VBoxContainer2/PlayButton" to="MarginContainer/VBoxContainer2/PlayButton" method="grab_focus"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer2/ClearData" to="." method="OnClearDataPressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer2/QuitButton" to="." method="OnQuitPressed"]

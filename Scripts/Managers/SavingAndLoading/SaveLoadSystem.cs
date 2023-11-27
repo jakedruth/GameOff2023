@@ -12,15 +12,24 @@ public static class SaveLoadSystem
         file.StoreLine(jsonString);
 
         GD.Print("saved game");
+
+        file.Flush();
+        file.Close();
     }
 
-    public static GameData Load()
+    public static bool DoesSaveExist()
     {
-        GameData result = new GameData();
+        return FileAccess.FileExists(localPath);
+    }
 
-        if (!FileAccess.FileExists(localPath))
+    public static void Load(ref GameData data)
+    {
+        if (!DoesSaveExist())
         {
-            throw new System.Exception($"there is no file at {localPath}");
+            GD.PrintErr($"there is no file at {localPath}. Making new file");
+            data = new GameData();
+            Save(data);
+            return;
         }
 
         FileAccess file = FileAccess.Open(localPath, FileAccess.ModeFlags.Read);
@@ -30,11 +39,18 @@ public static class SaveLoadSystem
         if (parseResults != Error.Ok)
         {
             GD.Print($"JSON Parse Error: {json.GetErrorMessage()} in {line} at line {json.GetErrorLine()}");
-            return null;
+
+            return;
         }
 
-        result.data = (Godot.Collections.Dictionary<string, Variant>)json.Data;
+        data.data = (Godot.Collections.Dictionary<string, Variant>)json.Data;
 
-        return result;
+        file.Flush();
+        file.Close();
+    }
+
+    public static void DeleteSaveDataFile()
+    {
+        DirAccess.RemoveAbsolute(ProjectSettings.GlobalizePath(localPath));
     }
 }

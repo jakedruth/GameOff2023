@@ -5,14 +5,14 @@ public class GameData
 {
     public Godot.Collections.Dictionary<string, Variant> data = new Godot.Collections.Dictionary<string, Variant>
     {
-        {"level01Completed", false},
-        {"level02Completed", false},
-        {"level03Completed", false},
-        {"level04Completed", false},
-        {"level05Completed", false},
-        {"level06Completed", false},
-        {"level07Completed", false},
-        {"level08Completed", false},
+        {"level1", false},
+        {"level2", false},
+        {"level3", false},
+        {"level4", false},
+        {"level5", false},
+        {"level6", false},
+        {"level7", false},
+        {"level8", false},
     };
 
     public Variant GetValue(string key)

@@ -25,7 +25,6 @@ public partial class SmoothScrollContainer : ScrollContainer
         _t = 0;
         _hStart = ScrollHorizontal;
         _hTarget = ((Control)_currentFocus.GetParent()).Position.X + offset;
-        GD.Print(((Control)_currentFocus.GetParent()).Position);
     }
 
     public override void _Process(double delta)

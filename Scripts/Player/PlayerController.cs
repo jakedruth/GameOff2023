@@ -42,7 +42,13 @@ public partial class PlayerController : CharacterBody2D
         jumpKey = Input.IsActionPressed("jump");
         onJumpKey = Input.IsActionJustPressed("jump");
 
-        // Debug to change sizes
+        if (Input.IsActionJustPressed("reset_level"))
+            GetNode<SceneManager>("/root/SceneManager").ResetLevel();
+
+        if (Input.IsActionJustPressed("pause"))
+            GetNode<SceneManager>("/root/SceneManager").TogglePause();
+
+        //*// Debug to change sizes
         if (Input.IsKeyLabelPressed(Godot.Key.Kp1))
             SwitchMovementData(0);
 
@@ -51,11 +57,7 @@ public partial class PlayerController : CharacterBody2D
 
         if (Input.IsKeyLabelPressed(Godot.Key.Kp3))
             SwitchMovementData(2);
-
-        if (Input.IsKeyLabelPressed(Godot.Key.R))
-        {
-            GetNode<SceneManager>("/root/SceneManager").ResetLevel();
-        }
+        //*/ //End Debug
 
         // Update the state machine
         StateMachine.Process(dt);

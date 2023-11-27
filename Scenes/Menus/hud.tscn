@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://8q3o3ee5uccn" path="res://Resources/Kenney Mini.ttf" id="3_mx352"]
 [ext_resource type="Texture2D" uid="uid://bonv2hioqmnbg" path="res://Resources/player.png" id="4_43i0s"]
 
-[node name="HUD" type="Control" node_paths=PackedStringArray("selectCharacterHolder", "shrinkButton", "normalButton", "GrowButton", "levelCompleteHolder", "levelCompleteButton") groups=["HUD"]]
+[node name="HUD" type="Control" node_paths=PackedStringArray("selectCharacterHolder", "shrinkButton", "normalButton", "GrowButton", "levelCompleteHolder", "levelCompleteButton", "pauseScreenHolder", "continueGameButton") groups=["HUD"]]
 z_index = 50
 layout_mode = 3
 anchors_preset = 0
@@ -18,8 +18,11 @@ normalButton = NodePath("SelectCharacter/HBoxContainer/Normal")
 GrowButton = NodePath("SelectCharacter/HBoxContainer/Grow")
 levelCompleteHolder = NodePath("Level Complete")
 levelCompleteButton = NodePath("Level Complete/HBoxContainer/Continue")
+pauseScreenHolder = NodePath("Pause")
+continueGameButton = NodePath("Pause/HBoxContainer/Resume")
 
 [node name="SelectCharacter" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -96,7 +99,6 @@ region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
 [node name="Level Complete" type="ColorRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -139,6 +141,69 @@ theme = ExtResource("2_cu8s0")
 theme_override_fonts/font = ExtResource("3_mx352")
 text = "Continue"
 
+[node name="Pause" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0392157, 0.0392157, 0.0392157, 0.584314)
+
+[node name="Label" type="Label" parent="Pause"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 32.0
+offset_bottom = 64.0
+grow_horizontal = 2
+theme = ExtResource("2_cu8s0")
+text = "- Paused -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Pause"]
+process_mode = 2
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -34.0
+offset_top = -112.0
+offset_right = 36.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="Resume" type="Button" parent="Pause/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_cu8s0")
+theme_override_fonts/font = ExtResource("3_mx352")
+theme_override_font_sizes/font_size = 8
+text = "Resume Game"
+
+[node name="Reset" type="Button" parent="Pause/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_cu8s0")
+theme_override_fonts/font = ExtResource("3_mx352")
+theme_override_font_sizes/font_size = 8
+text = "Reset"
+
+[node name="Leave" type="Button" parent="Pause/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_cu8s0")
+theme_override_fonts/font = ExtResource("3_mx352")
+theme_override_font_sizes/font_size = 8
+text = "Leave Level"
+
 [connection signal="pressed" from="SelectCharacter/HBoxContainer/Shrink" to="." method="OnPlayLevel" binds= [0]]
 [connection signal="pressed" from="SelectCharacter/HBoxContainer/Normal" to="." method="OnPlayLevel" binds= [1]]
 [connection signal="pressed" from="SelectCharacter/HBoxContainer/Grow" to="." method="OnPlayLevel" binds= [2]]
+[connection signal="pressed" from="Level Complete/HBoxContainer/Continue" to="." method="GoToLevelSelect"]
+[connection signal="pressed" from="Pause/HBoxContainer/Resume" to="." method="UnPause"]
+[connection signal="pressed" from="Pause/HBoxContainer/Reset" to="." method="ResetLevel"]
+[connection signal="pressed" from="Pause/HBoxContainer/Leave" to="." method="GoToLevelSelect"]

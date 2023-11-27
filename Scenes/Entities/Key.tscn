@@ -66,5 +66,4 @@ shape = SubResource("RectangleShape2D_dwa0x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hwoon")
-animation = &"hide"
-frame_progress = 0.334422
+animation = &"show"

@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7u6to6cb1f4m"]
+
+[ext_resource type="Script" path="res://Scripts/Pushable.cs" id="1_wxaoi"]
+[ext_resource type="Texture2D" uid="uid://dgwlenos213rb" path="res://Resources/Box-1x1.png" id="2_63wwn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xc0c8"]
+custom_solver_bias = 1.0
+size = Vector2(15.5, 15.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4xb34"]
+size = Vector2(14, 2)
+
+[node name="Box" type="StaticBody2D"]
+script = ExtResource("1_wxaoi")
+velocity = 90.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xc0c8")
+
+[node name="ImgHolder" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="ImgHolder"]
+texture = ExtResource("2_63wwn")
+
+[node name="RayCast2D_Center" type="RayCast2D" parent="."]
+position = Vector2(0, 4)
+target_position = Vector2(0, 16)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_4xb34")

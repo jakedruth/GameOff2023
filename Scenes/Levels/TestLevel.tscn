@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://djbhyks1ihamp" path="res://Scenes/Menus/hud.tscn" id="2_fe7au"]
 [ext_resource type="TileSet" uid="uid://kux4toyy673v" path="res://Settings/TileSet.tres" id="3_e3i8k"]
 [ext_resource type="PackedScene" uid="uid://cvnospxfmgq6n" path="res://Scenes/Entities/Player.tscn" id="4_b35ys"]
-[ext_resource type="PackedScene" uid="uid://c7u6to6cb1f4m" path="res://Scenes/Entities/box.tscn" id="5_au0oh"]
+[ext_resource type="PackedScene" uid="uid://c7u6to6cb1f4m" path="res://Scenes/Entities/Box-1x1.tscn" id="5_au0oh"]
 [ext_resource type="PackedScene" uid="uid://dvrmacrtlnw70" path="res://Scenes/Entities/fan.tscn" id="6_aryeb"]
 [ext_resource type="PackedScene" uid="uid://der0ygmj4dqfj" path="res://Scenes/Entities/moving_platform.tscn" id="7_5keaw"]
 [ext_resource type="PackedScene" uid="uid://dsmvi8ll6tbuw" path="res://Scenes/Entities/falling_block.tscn" id="8_b3m6h"]
@@ -19,6 +19,7 @@ _data = {
 point_count = 2
 
 [node name="Stage" type="Node2D" node_paths=PackedStringArray("round1nodes", "round2nodes", "round3nodes") groups=["LevelHandler"]]
+process_mode = 3
 script = ExtResource("1_cw16m")
 round1nodes = [NodePath("StageHolder/Key")]
 round2nodes = [NodePath("StageHolder/Key2")]
@@ -28,6 +29,7 @@ round3nodes = [NodePath("StageHolder/Key3")]
 visible = false
 
 [node name="StageHolder" type="Node" parent="."]
+process_mode = 1
 
 [node name="Camera2D" type="Camera2D" parent="StageHolder"]
 position = Vector2(160, 90)
@@ -55,8 +57,6 @@ position = Vector2(288, 120)
 curve = SubResource("Curve2D_1oky5")
 
 [node name="MovingPlatform" parent="StageHolder/Path2D" instance=ExtResource("7_5keaw")]
-speed = 30.0
-waitAtWayPointTime = 1.0
 
 [node name="FallingBlock" parent="StageHolder" instance=ExtResource("8_b3m6h")]
 position = Vector2(156, 64)

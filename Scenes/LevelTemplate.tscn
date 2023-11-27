@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c731vuam4o714" path="res://Scenes/Entities/Key.tscn" id="6_176ng"]
 
 [node name="Stage" type="Node2D" node_paths=PackedStringArray("round1nodes", "round2nodes", "round3nodes") groups=["LevelHandler"]]
+process_mode = 3
 script = ExtResource("1_nivsd")
 round1nodes = []
 round2nodes = []
@@ -17,6 +18,7 @@ round3nodes = []
 visible = false
 
 [node name="StageHolder" type="Node" parent="."]
+process_mode = 1
 
 [node name="Camera2D" type="Camera2D" parent="StageHolder"]
 position = Vector2(160, 90)
