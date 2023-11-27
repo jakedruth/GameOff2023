@@ -66,7 +66,8 @@ public partial class Key : Area2D
             _door.OpenDoor();
 
             // Remove from the scene
-            Free();
+            Hide();
+            ProcessMode = ProcessModeEnum.Disabled;
         }
     }
 
